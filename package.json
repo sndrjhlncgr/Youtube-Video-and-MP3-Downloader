@@ -6,11 +6,20 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-jest": "^26.0.1",
+    "babel-loader": "^8.1.0",
+    "babel-preset-react": "^6.24.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "node-sass": "^4.14.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "sass-loader": "^8.0.2",
+    "webpack": "^4.43.0"
   }
 }
