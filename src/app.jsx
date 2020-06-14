@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button';
+import Home from './components/Home.jsx';
 
-
-function App() {
-    return(
-        <div>
-            <h1>React Component</h1>
-        </div>
-    )
+class App extends Component {
+    render() {
+        return (
+            <div>
+                <Home/>
+            </div>
+        )
+    }
 }
 
 export default App;

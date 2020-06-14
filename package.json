@@ -7,8 +7,10 @@
     "build": "webpack-dev-server --config webpack.config.js --process --profile --colors"
   },
   "dependencies": {
+    "@hot-loader/react-dom": "^16.8.6",
     "babel-jest": "^26.0.1",
     "babel-preset-react": "^6.24.1",
+    "bootstrap": "^4.5.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
@@ -17,9 +19,9 @@
     "morgan": "~1.9.1",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
-    "@hot-loader/react-dom": "^16.8.6",
     "react-router-dom": "^5.2.0",
     "sass-loader": "^8.0.2",
     "webpack-cli": "^3.3.11",
@@ -30,6 +32,8 @@
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.10.1",
     "babel-loader": "^8.1.0",
+    "css-loader": "^3.6.0",
+    "style-loader": "^1.2.1",
     "webpack": "^4.43.0"
   }
 }
