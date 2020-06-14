@@ -3,12 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon node ./bin/www",
+    "build": "webpack-dev-server --config webpack.config.js --process --profile --colors"
   },
   "dependencies": {
-    "babel-core": "^6.26.3",
     "babel-jest": "^26.0.1",
-    "babel-loader": "^8.1.0",
     "babel-preset-react": "^6.24.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -19,7 +18,18 @@
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-hot-loader": "^4.12.21",
+    "@hot-loader/react-dom": "^16.8.6",
+    "react-router-dom": "^5.2.0",
     "sass-loader": "^8.0.2",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "babel-loader": "^8.1.0",
     "webpack": "^4.43.0"
   }
 }
