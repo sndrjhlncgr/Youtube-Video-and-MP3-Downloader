@@ -1,20 +1,17 @@
 import React, {Component} from 'react'
 import {Button} from 'react-bootstrap'
+import convertLink from '../_utils/api.js'
 
 class Home extends Component {
     state = {
         checkLink: false,
-        url: 'd',
-    }
-
-    checkLink = (url) => {
-        // validate here the url
-        this.setState({checkLink: url.length > 0, url})
-        console.log(this.state.checkLink, this.state.url)
+        url: 'https://youtu.be/nfj3GtI4WGM?list=RDnfj3GtI4WGM',
     }
 
     downloadUrl = () => {
-        window.location.href = `http://localhost:3000/download?URL=${this.state.url}`
+       convertLink(this.state.url, res => {
+            console.log(res)
+       })
     }
 
     render() {
@@ -23,14 +20,9 @@ class Home extends Component {
                 <div className="input-group mb-3">
                     <input
                         type="text"
-                        className={`form-control download-url ${
-                            this.state.checkLink && 'is-valid'
-                        }`}
+                        className={`form-control download-url`}
                         required
-                        onBlurCapture={(e) => {
-                            e.preventDefault()
-                            this.checkLink(e.target.value)
-                        }}
+                        value={this.state.url}
                     />
                     <div className="input-group-append">
                         <Button
@@ -39,7 +31,6 @@ class Home extends Component {
                                 e.preventDefault()
                                 this.downloadUrl()
                             }}
-                            disabled={!this.state.checkLink && true}
                         >
                             Download
                         </Button>

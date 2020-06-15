@@ -4,18 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
-const ytdl = require('ytdl-core');
 var indexRouter = require('./routes/index');
 var ytdlRouter = require('./routes/api/ytdl');
 
 var app = express();
 
+app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// new
-app.use(cors());
 
 
 app.use(logger('dev'));
@@ -25,15 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.get('/download', (req,res) => {
-  var URL = req.query.URL;
-  res.header('Content-Disposition', 'attachment; filename="video.mp4"');
-  ytdl(URL, {
-      format: 'mp4'
-      }).pipe(res);
-});
-
-app.use('/', ytdlRouter);
+app.use('/api', ytdlRouter);
 app.use('/*', indexRouter);
 
 

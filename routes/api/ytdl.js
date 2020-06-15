@@ -1,13 +1,21 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express')
+const router = express.Router()
+const ytdl = require('ytdl-core');
 
-/* GET Video. */
-router.get('/download', (req,res) => {
-    var URL = req.query.URL;
-    res.header('Content-Disposition', 'attachment; filename="video.mp4"');
-    ytdl(URL, {
-        format: 'mp4'
-        }).pipe(res);
-  });
+router.get('/convert',async (req, res) => {
+  try {
+		const url = req.query.URL;
+		await ytdl.getInfo(url, { 
+      filter: format => format.container === 'mp4',
+      quality: 'highest'
+    },(err, info) => {
+		  res.json(info)
+		});
+	} catch (err) {
+		res.json(err);
+	}
+})
 
-module.exports = router;
+
+
+module.exports = router

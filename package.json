@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@hot-loader/react-dom": "^16.8.6",
+    "axios": "^0.19.2",
     "babel-jest": "^26.0.1",
     "babel-preset-react": "^6.24.1",
     "bootstrap": "^4.5.0",
