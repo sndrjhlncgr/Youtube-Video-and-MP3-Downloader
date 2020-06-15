@@ -66,7 +66,7 @@ class ConvertPanel extends Component {
                                 </ul>
                                 <div className="tab-content" id="myTabContent">
                                     <div className={`tab-pane fade show ${this.state.eventkey === "video" ? 'active': ''}`} role="tabpanel" aria-labelledby="home-tab">
-                                        Video
+                                        Video 
                                     </div>
                                     <div className={`tab-pane fade show ${this.state.eventkey === "mp3" ? 'active': ''}`} role="tabpanel" aria-labelledby="profile-tab">
                                         Mp3
