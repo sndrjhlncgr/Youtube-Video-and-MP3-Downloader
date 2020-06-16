@@ -17,3 +17,10 @@
 .youtube-video-embed {
 
 }
+
+
+.youtube-categories .nav-item {
+    width: calc(100% - 73%)!important;
+    cursor: pointer !important;
+}
+

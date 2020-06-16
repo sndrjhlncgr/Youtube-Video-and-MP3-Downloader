@@ -4,7 +4,7 @@ import VideoInput from './parts/videoInput.jsx'
 class Home extends Component {
     render() {
         return (
-            <div>
+            <div className="container">
                 <VideoInput />
             </div>
         )
