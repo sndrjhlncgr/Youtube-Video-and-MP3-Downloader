@@ -5,10 +5,7 @@ const ytdl = require('ytdl-core')
 router.get('/convert', async (req, res) => {
     try {
         const url = req.query.URL
-        await ytdl.getInfo(url,{
-                filter: (format) => format.container === 'mp4',
-                quality: 'highest',
-            },  (err, info) => {
+        await ytdl.getInfo(url,  (err, info) => {
                 res.json(info)
             }
         )
