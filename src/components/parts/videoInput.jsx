@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import convertLink from '../../_utils/api.js'
+import {convertLink} from '../../_utils/api.js'
 import { Link } from 'react-router-dom'
 import ConvertPanel from './convertPanel.jsx'
 
@@ -47,7 +47,7 @@ class VideoInput extends Component {
                 </div>
                 <small className="form-text text-muted terms-of-use">By using our service you are accepting our <Link to="/">terms of use.</Link></small>
                 <div className="mb-3 mt-5">
-                    <ConvertPanel data={this.state.videoInfo}/>
+                    <ConvertPanel data={this.state.videoInfo} url={this.state.url}/>
                 </div>
             </div>
         )

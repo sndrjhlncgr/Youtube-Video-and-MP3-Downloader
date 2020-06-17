@@ -105,7 +105,7 @@ class ConvertPanel extends Component {
                                             <th scope="col">Download</th>
                                         </tr>
                                     </thead>
-                                        <Mp3List info={this.state.info}/>
+                                        <Mp3List info={this.state.info} url={this.props.url}/>
                                 </table>
                             </div>
                             <div className={`tab-pane fade show ${this.state.eventkey === "audio" ? 'active': ''}`} role="tabpanel" aria-labelledby="contact-tab">

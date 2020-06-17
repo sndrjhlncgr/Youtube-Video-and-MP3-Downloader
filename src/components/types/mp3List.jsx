@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {downloadMp3} from '../../_utils/api'
+
 
 
 class Mp3List extends Component {
@@ -20,7 +22,10 @@ class Mp3List extends Component {
                                     .{format.container}
                                 </td>
                                 <td> 
-                                    <button type="button" className="btn btn-success btn-sm" href="dsa">Download</button>
+                                    <button type="button" className="btn btn-success btn-sm" onClick={e => {
+                                        e.preventDefault();
+                                        downloadMp3(this.props.url)
+                                    }}>Download</button>
                                 </td>
                             </tr>
                         )

@@ -14,4 +14,12 @@ router.get('/convert', async (req, res) => {
     }
 })
 
+router.get('/download/selectedVideo', async (req, res) => {  
+    var {URL} = req.query;
+    res.header('Content-Disposition', 'attachment; filename="video.mp3"');
+    ytdl(URL, {
+        format: 'mp3'
+        }).pipe(res);      
+ });
+
 module.exports = router
