@@ -3,6 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import { faHeadphones } from '@fortawesome/free-solid-svg-icons'
 import { faFileAudio } from '@fortawesome/free-solid-svg-icons'
+import VideoList from '../types/videoList'
+import Mp3List from '../types/mp3List'
+import AudioList from '../types/audioList'
 
 class ConvertPanel extends Component {
     constructor(props) {
@@ -14,10 +17,18 @@ class ConvertPanel extends Component {
         eventkey: 'video'
     }
 
+    componentDidMount() {
+        this.resetState();
+    }
+
     componentDidUpdate(prevProps, prevState, snapShot) {
         if (prevProps.data.video_id != this.props.data.video_id) {
-            this.openPanel()
+            this.openPanel();
         }
+    }
+
+    resetState = () => {
+    
     }
 
     openPanel = () => {
@@ -27,22 +38,6 @@ class ConvertPanel extends Component {
     }
 
     render() {
-        const resoType = [
-            { resolution: "144p", alsoKnown: "SD" },
-            { resolution: "240p", alsoKnown: "SD" },
-            { resolution: "360p", alsoKnown: "SD" },
-            { resolution: "480p", alsoKnown: "SD" },
-            { resolution: "720p", alsoKnown: "HD" },
-            { resolution: "720p60", alsoKnown: "HD 60fps" },
-            { resolution: "1080p", alsoKnown: "FHD" },
-            { resolution: "1080p60", alsoKnown: "FHD 60fps" },
-            { resolution: "1440p", alsoKnown: "QHD" },
-            { resolution: "1440p60", alsoKnown: "QHD 60fps" },
-            { resolution: "2160p", alsoKnown: "UHD" },
-            { resolution: "2160p60", alsoKnown: "UHD 60fps" },
-            { resolution: "4320p", alsoKnown: "8K" },
-            { resolution: "4320p60", alsoKnown: "8K 60fps" },
-        ]
         return (
             <div>
                 <div className="row">
@@ -90,35 +85,7 @@ class ConvertPanel extends Component {
                                                 <th scope="col">Download</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                {this.state.info.formats && this.state.info.formats.filter(data => data.codecs.includes('avc1') && data.mimeType.includes('video/mp4')).map((format, index) => {
-                                                    if(index == 0) {
-                                                        return false
-                                                    }
-                                                    return (
-                                                        <tr key={index}>
-                                                            <td>
-                                                                {format.qualityLabel} 
-                                                                {resoType.filter(reso => reso.resolution === format.qualityLabel).map((res,index) => {
-                                                                    return (
-                                                                        <span key={index} class="badge badge-primary ml-2">{res.alsoKnown}</span> 
-                                                                    )
-                                                                })}
-                                                            </td>
-                                                            <td>
-                                                                .{format.container}
-                                                            </td>
-                                                            <td> 
-                                                                <button type="button" className="btn btn-success btn-sm" onClick={e => {
-                                                                    e.preventDefault();
-                                                                    window.location.href = format.url
-                                                                }}>Download</button>
-                                                            </td>
-                                                        </tr>
-                                                    )
-                                                })
-                                                }
-                                            </tbody>
+                                               <VideoList info={this.state.info}/>
                                         </table>
                                     </div>
                                     <div className={`tab-pane fade show ${this.state.eventkey === "mp3" ? 'active': ''}`} role="tabpanel" aria-labelledby="profile-tab">
@@ -130,24 +97,7 @@ class ConvertPanel extends Component {
                                                 <th scope="col">Download</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                {this.state.info.formats && this.state.info.formats.filter(data => data.mimeType.includes('audio') && data.audioBitrate === 128).map((format, index) => {
-                                                        return (
-                                                            <tr key={index}>
-                                                                <td>
-                                                                    {format.audioBitrate}Kbps
-                                                                </td>
-                                                                <td>
-                                                                    .{format.container}
-                                                                </td>
-                                                                <td> 
-                                                                    <button type="button" className="btn btn-success btn-sm" href="dsa">Download</button>
-                                                                </td>
-                                                            </tr>
-                                                        )
-                                                    })
-                                                }
-                                            </tbody>
+                                                <Mp3List info={this.state.info}/>
                                         </table>
                                     </div>
                                     <div className={`tab-pane fade show ${this.state.eventkey === "audio" ? 'active': ''}`} role="tabpanel" aria-labelledby="contact-tab">
@@ -159,24 +109,7 @@ class ConvertPanel extends Component {
                                                 <th scope="col">Download</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                {this.state.info.formats && this.state.info.formats.filter(data => data.mimeType.includes('audio') && data.audioBitrate > 128).map((format, index) => {
-                                                        return (
-                                                            <tr key={index}>
-                                                                <td>
-                                                                    {format.audioBitrate}Kbps
-                                                                </td>
-                                                                <td>
-                                                                    .{format.container}
-                                                                </td>
-                                                                <td> 
-                                                                    <button type="button" className="btn btn-success btn-sm">Download</button>
-                                                                </td>
-                                                            </tr>
-                                                        )
-                                                    })
-                                                }
-                                            </tbody>
+                                            <AudioList info={this.state.info}/>
                                         </table>
                                     </div>
                                 </div>
