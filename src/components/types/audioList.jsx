@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {downloadAudio} from '../../_utils/api'
 
 class AudioList extends Component {
     constructor(props) {
@@ -17,10 +17,14 @@ class AudioList extends Component {
                                     <span className="badge badge-success ml-2">Kbps</span>
                                 </td>
                                 <td>
-                                    .{format.container}
+                                    .flac
                                 </td>
                                 <td> 
-                                    <button type="button" className="btn btn-success btn-sm">Download</button>
+                                    <button type="button" className="btn btn-success btn-sm" onClick={e => {
+                                        e.preventDefault();
+                                        const {title} = this.props.info
+                                        downloadAudio(this.props.url,title)
+                                    }}>Download</button>
                                 </td>
                             </tr>
                         )

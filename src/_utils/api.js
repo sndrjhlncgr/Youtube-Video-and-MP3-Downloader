@@ -19,7 +19,17 @@ export const downloadMp3 = (url,title) =>  {
 }
 
 export const downloadMp4 = (url,title) =>  {
-    const filename = `${title}.mp4`
-    window.location.href = `${API_LINK}/download/mp4?URL=${url}&TITLE=${filename}`
+    axios.get(`${API_LINK}/download/mp4`,{
+        params:{
+            URL: url,
+            TITLE:title
+        }
+    })
+    .then(res => window.location.href = res)
 }
-export default convertLink | downloadMp3 | downloadMp4
+
+export const downloadAudio = (url,title) =>  {
+    const filename = `${title}.flac`
+    window.location.href = `${API_LINK}/download/audio?URL=${url}&TITLE=${filename}`
+}
+export default convertLink | downloadMp3 | downloadMp4 | downloadAudio

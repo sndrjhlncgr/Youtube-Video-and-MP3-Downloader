@@ -19,7 +19,7 @@ class Mp3List extends Component {
                                     <span className="badge badge-success ml-2">Kbps</span>
                                 </td>
                                 <td>
-                                    .{format.container}
+                                    .mp3
                                 </td>
                                 <td> 
                                     <button type="button" className="btn btn-success btn-sm" onClick={e => {
