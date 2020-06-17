@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {resoType} from '../utils/resolutionTypes'
+import {resoType} from '../helpers/resolutionTypes'
 
 
 class VideoList extends Component {
