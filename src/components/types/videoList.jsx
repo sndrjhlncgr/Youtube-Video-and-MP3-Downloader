@@ -7,7 +7,6 @@ class VideoList extends Component {
         super(props)
     }
     render() {
-        console.log(this.props)
         return (
             <tbody>
                 {this.props.info && this.props.info.formats && this.props.info.formats.filter(data => data.codecs.includes('avc1') && data.mimeType.includes('video/mp4')).map((format, index) => {
