@@ -24,7 +24,8 @@ class Mp3List extends Component {
                                 <td> 
                                     <button type="button" className="btn btn-success btn-sm" onClick={e => {
                                         e.preventDefault();
-                                        downloadMp3(this.props.url)
+                                        const {title} = this.props.info
+                                        downloadMp3(this.props.url,title)
                                     }}>Download</button>
                                 </td>
                             </tr>

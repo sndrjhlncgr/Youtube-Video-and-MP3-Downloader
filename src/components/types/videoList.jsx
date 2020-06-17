@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {resoType} from '../helpers/resolutionTypes'
+import {downloadMp4} from '../../_utils/api'
 
 
 class VideoList extends Component {
@@ -29,7 +30,8 @@ class VideoList extends Component {
                                 <td> 
                                     <button type="button" className="btn btn-success btn-sm" onClick={e => {
                                         e.preventDefault();
-                                        window.location.href = format.url
+                                        const {title} = this.props.info
+                                        downloadMp4(this.props.url,title)
                                     }}>Download</button>
                                 </td>
                             </tr>

@@ -13,8 +13,13 @@ export const convertLink = (url,callback) =>  {
     })
 }
 
-export const downloadMp3 = (url) =>  {
-    // window.location.href = `${API_LINK}/download/selectedVideo?URL=${url}}`
+export const downloadMp3 = (url,title) =>  {
+    const filename = `${title}.mp3`
+    window.location.href = `${API_LINK}/download/mp3?URL=${url}&TITLE=${filename}`
 }
 
-export default convertLink | downloadMp3
+export const downloadMp4 = (url,title) =>  {
+    const filename = `${title}.mp4`
+    window.location.href = `${API_LINK}/download/mp4?URL=${url}&TITLE=${filename}`
+}
+export default convertLink | downloadMp3 | downloadMp4
