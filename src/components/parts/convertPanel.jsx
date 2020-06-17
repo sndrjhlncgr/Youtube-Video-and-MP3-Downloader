@@ -28,7 +28,7 @@ class ConvertPanel extends Component {
     }
 
     resetState = () => {
-    
+        
     }
 
     openPanel = () => {
@@ -42,7 +42,7 @@ class ConvertPanel extends Component {
             <div>
                 <div className="row">
                             <div className="col-sm-5">
-                                <div className="embed-responsive embed-responsive-4by3 youtube-video-embed">
+                                <div className="embed-responsive embed-responsive-4by3 youtube-video-embed mb-3">
                                     <iframe
                                         className="embed-responsive-item"
                                         src={`https://www.youtube.com/embed/${
@@ -52,7 +52,15 @@ class ConvertPanel extends Component {
                                         }`}
                                     ></iframe>
                                 </div>
-                                <h4>{this.state.info.title}</h4>
+                                {this.state.info.title && 
+                                <blockquote className="blockquote">
+                                 
+                                        {this.state.info.title}
+                    
+                                    <footer className="blockquote-footer">Title</footer>
+                                </blockquote>
+                                }
+
                             </div>
                             <div className="col-sm-7">
                                 <ul className="nav nav-tabs youtube-categories">
@@ -80,9 +88,9 @@ class ConvertPanel extends Component {
                                         <table className="table">
                                             <thead>
                                                 <tr>
-                                                <th scope="col">Resolution</th>
-                                                <th scope="col">File Type</th>
-                                                <th scope="col">Download</th>
+                                                    <th scope="col">Resolution</th>
+                                                    <th scope="col">File Type</th>
+                                                    <th scope="col">Download</th>
                                                 </tr>
                                             </thead>
                                                <VideoList info={this.state.info}/>
@@ -92,9 +100,9 @@ class ConvertPanel extends Component {
                                         <table className="table">
                                             <thead>
                                                 <tr>
-                                                <th scope="col">Resolution</th>
-                                                <th scope="col">File Type</th>
-                                                <th scope="col">Download</th>
+                                                    <th scope="col">Resolution</th>
+                                                    <th scope="col">File Type</th>
+                                                    <th scope="col">Download</th>
                                                 </tr>
                                             </thead>
                                                 <Mp3List info={this.state.info}/>
@@ -104,9 +112,9 @@ class ConvertPanel extends Component {
                                         <table className="table">
                                             <thead>
                                                 <tr>
-                                                <th scope="col">Resolution</th>
-                                                <th scope="col">File Type</th>
-                                                <th scope="col">Download</th>
+                                                    <th scope="col">Resolution</th>
+                                                    <th scope="col">File Type</th>
+                                                    <th scope="col">Download</th>
                                                 </tr>
                                             </thead>
                                             <AudioList info={this.state.info}/>

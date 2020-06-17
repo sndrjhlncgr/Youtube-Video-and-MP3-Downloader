@@ -24,3 +24,7 @@
     cursor: pointer !important;
 }
 
+
+.blockquote-footer::before {
+    content: none;
+}
