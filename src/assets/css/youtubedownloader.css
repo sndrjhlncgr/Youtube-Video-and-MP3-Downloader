@@ -7,8 +7,14 @@
     left: 17%;
 }
 
+.whole-panel {
+    border-top: rgb(103, 103, 103) solid 2px;
+    border-bottom: rgb(103, 103, 103) solid 2px;
+    padding: 15px;
+}
+
 .whole-input input::placeholder {
-  font-size: 17px;
+    font-size: 17px;
 }
 
 .whole-input input {
@@ -16,7 +22,7 @@
     padding-left: 15px;
 }
 
-.form-control:focus{
+.form-control:focus {
     border-color: #c1c1c1;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -28,10 +34,11 @@
     width: (100% - 200px);
     height: 100%;
     color: rgb(240, 240, 240) !important;
-    background-color: rgb(46,164,79) !important;
+    background-color: rgb(46, 164, 79) !important;
 }
 
-.convert-button:hover, .convert-button:active {
+.convert-button:hover,
+.convert-button:active {
     font-size: 18px;
     border-radius: 0px 10px 10px 0px;
     width: (100% - 200px);
@@ -39,7 +46,6 @@
     color: rgb(240, 240, 240) !important;
     background-color: rgb(42, 155, 74) !important;
 }
-
 
 .download-url {
     font-size: 20px;
@@ -56,10 +62,11 @@
     width: calc(100% - 73%) !important;
     cursor: pointer !important;
 }
-.nav-link{
+.nav-link {
     border-radius: 15px 15px 0px 0px !important;
 }
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active  {
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
     color: rgb(79, 79, 79);
     background-color: #fff;
 }

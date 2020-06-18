@@ -62,7 +62,7 @@ class VideoInput extends Component {
                     </div>
                 </div>
                 <small className="form-text text-muted terms-of-use">By using our service you are accepting our <Link to="/terms-of-service" target="_blank">terms of use.</Link></small>
-                <div className="mb-3 mt-5">
+                <div className="mb-3 mt-5 whole-panel">
                     <ConvertPanel data={this.state.videoInfo} url={this.state.url}/>
                 </div>
             </div>
