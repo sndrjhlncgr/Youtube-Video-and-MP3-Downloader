@@ -29,6 +29,14 @@ module.exports = {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
             },
+            {
+                test: /\.(woff|woff2|eot|ttf|svg)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
+            },
         ],
     },
     plugins: [

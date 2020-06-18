@@ -30,8 +30,8 @@ class VideoList extends Component {
                                 <td> 
                                     <button type="button" className="btn btn-success btn-sm" onClick={e => {
                                         e.preventDefault();
-                                        const {title} = this.props.info
-                                        downloadMp4(this.props.url,title)
+                                        const {url, info} = this.props
+                                        downloadMp4(url,format,info)
                                     }}>Download</button>
                                 </td>
                             </tr>

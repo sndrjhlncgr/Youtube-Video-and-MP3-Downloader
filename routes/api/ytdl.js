@@ -15,6 +15,34 @@ router.get('/convert', async (req, res) => {
     }
 })
 
+router.get('/download/mp4', async (req, res) => {
+    console.log(req.query.options)
+    // const {
+    //     format: {height, mimeType, width, qualityLabel, quality, container},
+    //     url,
+    //     title,
+    // } = req.query.options
+    // console.log(height, mimeType, width, qualityLabel, quality, container,url,title)
+    // const headerFilename = `attachment; filename=${title}`
+    // res.set({
+    //     'Content-Disposition': headerFilename,
+    // })
+
+    // const file = ytdl(url, {
+    //     format: container,
+    //     filter: (format) =>
+    //         format.container === container &&
+    //         format.height === height &&
+    //         format.mimeType === mimeType &&
+    //         format.quality === quality &&
+    //         format.qualityLabel === qualityLabel &&
+    //         format.width === width,
+    // }).pipe(res)
+
+    // res.download(file)
+})
+
+
 router.get('/download/mp3', async (req, res) => {
     const {URL, TITLE} = req.query
     const headerFilename = `attachment; filename=${TITLE}`
@@ -26,19 +54,6 @@ router.get('/download/mp3', async (req, res) => {
     }).pipe(res)
 
     res.download(file);
-})
-
-router.get('/download/mp4', async (req, res) => {
-    const {URL, TITLE} = req.query
-    const headerFilename = `attachment; filename=${TITLE}`
-    res.set({
-        'Content-Disposition': headerFilename,
-    })
-    const file = ytdl(URL, {
-        format: 'mp4',
-    }).pipe(res)
-
-    res.download(file)
 })
 
 router.get('/download/audio', async (req, res) => {

@@ -12,20 +12,26 @@ export const convertLink = (url,callback) =>  {
         callback(res)
     })
 }
+export const downloadMp4 = (url,format,info) =>  {
+    const options = {
+        url:url,
+        format: {
+            height: format.height,
+            mimeType: format.mimeType,
+            width: format.width,
+            qualityLabel: format.qualityLabel,
+            quality: format.quality,
+            container: format.container
+        },
+        title: `${info.title}.mp4`
+    }
+
+    window.location.href = `${API_LINK}/download/mp4?url=${url}&options=${options}`
+}
 
 export const downloadMp3 = (url,title) =>  {
     const filename = `${title}.mp3`
     window.location.href = `${API_LINK}/download/mp3?URL=${url}&TITLE=${filename}`
-}
-
-export const downloadMp4 = (url,title) =>  {
-    axios.get(`${API_LINK}/download/mp4`,{
-        params:{
-            URL: url,
-            TITLE:title
-        }
-    })
-    .then(res => window.location.href = res)
 }
 
 export const downloadAudio = (url,title) =>  {
