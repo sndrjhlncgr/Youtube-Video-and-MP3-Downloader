@@ -15,12 +15,6 @@ class VideoInput extends Component {
         // for test
     }
 
-    componentDidUpdate(prevProps,prevState,snapShot)    {
-        if(prevState.url !== this.state.url)    {
-            this.convertLink()
-        }
-    }
-
     convertLink = () => {
         convertLink(this.state.url, (res) => {
             this.setState({videoInfo: res.data})
@@ -30,6 +24,7 @@ class VideoInput extends Component {
         navigator.clipboard.readText()
         .then(text => {
             this.setState({url: text})
+            this.convertLink()
         });
     }
 
