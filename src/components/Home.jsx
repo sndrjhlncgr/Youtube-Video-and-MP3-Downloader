@@ -5,7 +5,9 @@ class Home extends Component {
     render() {
         return (
             <div className="container">
-                <VideoInput />
+                <div className="main-input">
+                    <VideoInput />
+                </div>
             </div>
         )
     }

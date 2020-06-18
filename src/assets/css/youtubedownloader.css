@@ -1,8 +1,45 @@
+.main-input {
+    justify-content: center !important;
+}
+
+.whole-input {
+    width: 60%;
+    left: 20%;
+}
+
+.whole-input input::placeholder {
+  font-size: 17px;
+}
+
+.whole-input input {
+    font-size: 17px;
+    padding-left: 15px;
+}
+
+.form-control:focus{
+    border-color: #c1c1c1;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
 .download-button {
-    font-size: 20px;
+    font-size: 18px;
     border-radius: 0px 10px 10px 0px;
     width: (100% - 200px);
+    height: 100%;
+    color: rgb(240, 240, 240);
+    background-color: rgb(46,164,79);
 }
+
+.download-button:hover {
+    font-size: 18px;
+    border-radius: 0px 10px 10px 0px;
+    width: (100% - 200px);
+    height: 100%;
+    color: rgb(240, 240, 240);
+    background-color: rgb(42, 155, 74);
+}
+
 
 .download-url {
     font-size: 20px;
@@ -12,9 +49,7 @@
 
 .terms-of-use {
     text-align: center;
-}
-
-.youtube-video-embed {
+    font-size: 10px;
 }
 
 .youtube-categories .nav-item {
