@@ -20,7 +20,7 @@ class VideoList extends Component {
                                     {format.qualityLabel} 
                                     {resoType.filter(reso => reso.resolution === format.qualityLabel).map((res,index) => {
                                         return (
-                                            <span key={index} className="badge badge-danger ml-2">{res.alsoKnown}</span> 
+                                            <span key={index} className="badge badge-danger badge-danger-resolution ml-2">{res.alsoKnown}</span> 
                                         )
                                     })}
                                 </td>
@@ -28,7 +28,7 @@ class VideoList extends Component {
                                     .{format.container}
                                 </td>
                                 <td> 
-                                    <button type="button" className="btn btn-success btn-sm" onClick={e => {
+                                    <button type="button" className="btn btn-success btn-sm download-button" onClick={e => {
                                         e.preventDefault();
                                         const {url, info} = this.props
                                         downloadMp4(url,format,info)

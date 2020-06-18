@@ -14,13 +14,13 @@ class AudioList extends Component {
                             <tr key={index}>
                                 <td>
                                     {format.audioBitrate}
-                                    <span className="badge badge-success ml-2">Kbps</span>
+                                    <span className="badge badge-success badge-success-resolution ml-2">Kbps</span>
                                 </td>
                                 <td>
                                     .flac
                                 </td>
                                 <td> 
-                                    <button type="button" className="btn btn-success btn-sm" onClick={e => {
+                                    <button type="button" className="btn btn-success download-button btn-sm" onClick={e => {
                                         e.preventDefault();
                                         const {title} = this.props.info
                                         downloadAudio(this.props.url,title)

@@ -9,7 +9,11 @@ class VideoInput extends Component {
         url: '',
         videoInfo: {}
     }
-
+    componentDidMount() {
+        // this.setState({url: 'https://youtu.be/r2nyvDJO9hk'})
+        // this.convertLink() 
+        // for test
+    }
     convertLink = () => {
         convertLink(this.state.url, (res) => {
             this.setState({videoInfo: res.data})
@@ -33,7 +37,7 @@ class VideoInput extends Component {
                     <div className="input-group-append">
                         <button
                             type="button"
-                            className={`btn btn-light form-control download-button`}
+                            className={`btn btn-light form-control convert-button`}
                             onClick={(e) => {
                                 e.preventDefault()
                                 this.convertLink()

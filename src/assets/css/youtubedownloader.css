@@ -22,22 +22,22 @@
     box-shadow: none;
 }
 
-.download-button {
+.convert-button {
     font-size: 18px;
     border-radius: 0px 10px 10px 0px;
     width: (100% - 200px);
     height: 100%;
-    color: rgb(240, 240, 240);
-    background-color: rgb(46,164,79);
+    color: rgb(240, 240, 240) !important;
+    background-color: rgb(46,164,79) !important;
 }
 
-.download-button:hover {
+.convert-button:hover, .convert-button:active {
     font-size: 18px;
     border-radius: 0px 10px 10px 0px;
     width: (100% - 200px);
     height: 100%;
-    color: rgb(240, 240, 240);
-    background-color: rgb(42, 155, 74);
+    color: rgb(240, 240, 240) !important;
+    background-color: rgb(42, 155, 74) !important;
 }
 
 
@@ -56,7 +56,41 @@
     width: calc(100% - 73%) !important;
     cursor: pointer !important;
 }
+.nav-link{
+    border-radius: 15px 15px 0px 0px !important;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active  {
+    color: rgb(79, 79, 79);
+    background-color: #fff;
+}
+
+.nav-link:focus {
+    border-color: rgb(165, 148, 148) !important;
+}
 
 .blockquote-footer::before {
     content: none;
+}
+
+.download-button {
+    border-radius: 10px 10px 10px 10px;
+    font-size: 15px;
+}
+
+.badge-danger-resolution {
+    font-size: 10px;
+    vertical-align: text-top;
+}
+
+.badge-success-resolution {
+    font-size: 10px;
+    vertical-align: text-top;
+}
+
+.youtube-video-embed-empty {
+    background-color: gray;
+}
+
+.embed-responsive-item-empty {
+    display: none;
 }

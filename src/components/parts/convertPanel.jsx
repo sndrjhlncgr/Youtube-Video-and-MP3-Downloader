@@ -42,9 +42,9 @@ class ConvertPanel extends Component {
             <div>
                 <div className="row">
                     <div className="col-sm-5">
-                        <div className="embed-responsive embed-responsive-4by3 youtube-video-embed mb-3">
+                        <div className={`embed-responsive embed-responsive-4by3 youtube-video-embed mb-3 ${!this.state.info.video_id ? 'youtube-video-embed-empty' : ''}`}>
                             <iframe
-                                className="embed-responsive-item"
+                                className={`embed-responsive-item ${!this.state.info.video_id ? 'embed-responsive-item-empty' : ''}`}
                                 src={`https://www.youtube.com/embed/${
                                     this.state.info.video_id
                                         ? this.state.info.video_id
@@ -85,7 +85,7 @@ class ConvertPanel extends Component {
                         </ul>
                         <div className="tab-content" id="myTabContent">
                             <div className={`tab-pane fade show ${this.state.eventkey === "video" ? 'active': ''}`} role="tabpanel" aria-labelledby="home-tab">
-                                <table className="table">
+                                <table className="table table-borderless mt-2">
                                     <thead>
                                         <tr>
                                             <th scope="col">Resolution</th>
@@ -97,7 +97,7 @@ class ConvertPanel extends Component {
                                 </table>
                             </div>
                             <div className={`tab-pane fade show ${this.state.eventkey === "mp3" ? 'active': ''}`} role="tabpanel" aria-labelledby="profile-tab">
-                                <table className="table">
+                                <table className="table table-borderless mt-2">
                                     <thead>
                                         <tr>
                                             <th scope="col">Resolution</th>
@@ -109,7 +109,7 @@ class ConvertPanel extends Component {
                                 </table>
                             </div>
                             <div className={`tab-pane fade show ${this.state.eventkey === "audio" ? 'active': ''}`} role="tabpanel" aria-labelledby="contact-tab">
-                                <table className="table">
+                                <table className="table table-borderless mt-2">
                                     <thead>
                                         <tr>
                                             <th scope="col">Resolution</th>
