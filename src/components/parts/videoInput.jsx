@@ -14,10 +14,23 @@ class VideoInput extends Component {
         // this.convertLink() 
         // for test
     }
+
+    componentDidUpdate(prevProps,prevState,snapShot)    {
+        if(prevState.url !== this.state.url)    {
+            this.convertLink()
+        }
+    }
+
     convertLink = () => {
         convertLink(this.state.url, (res) => {
             this.setState({videoInfo: res.data})
         })
+    }
+    autoPaste = (e) => {
+        navigator.clipboard.readText()
+        .then(text => {
+            this.setState({url: text})
+        });
     }
 
     render() {
@@ -29,9 +42,14 @@ class VideoInput extends Component {
                         className={`form-control download-url`}
                         required
                         value={this.state.url}
-                        placeholder="Search or paste link here..."
+                        placeholder="Click this or paste link here..."
                         onChange={(e) => {
+                            e.preventDefault();
                             this.setState({url: e.target.value})
+                        }}
+                        onClick={e => {
+                            e.preventDefault();
+                            this.autoPaste(e)
                         }}
                     />
                     <div className="input-group-append">
