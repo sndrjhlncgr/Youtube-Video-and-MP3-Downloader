@@ -1,8 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const ytdl = require('ytdl-core')
-const glob = require('glob')
-const { format } = require('morgan')
 
 router.get('/convert', async (req, res) => {
     try {
@@ -16,12 +14,12 @@ router.get('/convert', async (req, res) => {
 })
 
 router.get('/download/mp4', async (req, res) => {
-    console.log(req.query.options)
+    const {url, formats} = req.query
+    res.json(JSON.parse(formats))
     // const {
     //     format: {height, mimeType, width, qualityLabel, quality, container},
-    //     url,
     //     title,
-    // } = req.query.options
+    // } = JSON.parse(formats)
     // console.log(height, mimeType, width, qualityLabel, quality, container,url,title)
     // const headerFilename = `attachment; filename=${title}`
     // res.set({
@@ -42,18 +40,15 @@ router.get('/download/mp4', async (req, res) => {
     // res.download(file)
 })
 
-
-router.get('/download/mp3', async (req, res) => {
+router.get('/download/mp3', (req, res) => {
     const {URL, TITLE} = req.query
     const headerFilename = `attachment; filename=${TITLE}`
     res.set({
         'Content-Disposition': headerFilename,
     })
-    const file = ytdl(URL, {
+    ytdl(URL, {
         format: 'mp3',
     }).pipe(res)
-
-    res.download(file);
 })
 
 router.get('/download/audio', async (req, res) => {
@@ -63,7 +58,7 @@ router.get('/download/audio', async (req, res) => {
         'Content-Disposition': headerFilename,
     })
     const file = ytdl(URL, {
-        filter: format => format.audioBitrate === 160,
+        filter: (format) => format.audioBitrate === 160,
         format: 'flac',
     }).pipe(res)
 
