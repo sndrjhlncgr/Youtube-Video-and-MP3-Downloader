@@ -44,18 +44,20 @@ export const downloadMp3 = (url,title) =>  {
     const filename = `${title}.mp3`
     axios.get(`${API_LINK}/download/mp3`, {
         params: {
-            URL:url,
-            TITLE: filename
+            url:url,
+            title: filename
         },
     })
     .then(response => {
         FileDownload(response.data, filename);
     })
-    // window.location.href = `${API_LINK}/download/mp3?URL=${url}&TITLE=${filename}`
 }
 
 export const downloadAudio = (url,title) =>  {
     const filename = `${title}.flac`
-    window.location.href = `${API_LINK}/download/audio?URL=${url}&TITLE=${filename}`
+    window.location.href = `${API_LINK}/download/audio?url=${url}&title=${filename}`
 }
 export default convertLink | downloadMp3 | downloadMp4 | downloadAudio
+
+
+   // window.location.href = `${API_LINK}/download/mp3?URL=${url}&TITLE=${filename}`

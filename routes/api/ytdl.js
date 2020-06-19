@@ -41,23 +41,23 @@ router.get('/download/mp4', async (req, res) => {
 })
 
 router.get('/download/mp3', (req, res) => {
-    const {URL, TITLE} = req.query
-    const headerFilename = `attachment; filename=${TITLE}`
+    const {url, title} = req.query
+    const headerFilename = `attachment; filename=${title}`
     res.set({
         'Content-Disposition': headerFilename,
     })
-    ytdl(URL, {
+    ytdl(url, {
         format: 'mp3',
     }).pipe(res)
 })
 
 router.get('/download/audio', async (req, res) => {
-    const {URL, TITLE} = req.query
-    const headerFilename = `attachment; filename=${TITLE}`
+    const {url, title} = req.query
+    const headerFilename = `attachment; filename=${title}`
     res.set({
         'Content-Disposition': headerFilename,
     })
-    const file = ytdl(URL, {
+    const file = ytdl(url, {
         filter: (format) => format.audioBitrate === 160,
         format: 'flac',
     }).pipe(res)
