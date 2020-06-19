@@ -12,10 +12,7 @@ class VideoList extends Component {
     render() {
         return (
             <tbody>
-                {this.props.info && this.props.info.formats && this.props.info.formats.filter(data => data.codecs.includes('avc1') && data.mimeType.includes('video/mp4')).map((format, index) => {
-                        if(index == 0) {
-                            return false
-                        }
+                {this.props.info && this.props.info.formats && this.props.info.formats.filter(data => data.codecs.includes('H.264') || data.codecs.includes('av01') && data.mimeType.includes('video/mp4')).map((format, index) => {
                         return (
                             <tr key={index}>
                                 <td>
