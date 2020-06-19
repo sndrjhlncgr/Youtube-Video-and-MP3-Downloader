@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {downloadMp3} from '../../_utils/api'
-
+import { faChevronCircleDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 class Mp3List extends Component {
@@ -26,7 +27,7 @@ class Mp3List extends Component {
                                         e.preventDefault();
                                         const {title} = this.props.info
                                         downloadMp3(this.props.url,title)
-                                    }}>Download</button>
+                                    }}>Download <FontAwesomeIcon className="ml-1" icon={faChevronCircleDown}/></button>
                                 </td>
                             </tr>
                         )

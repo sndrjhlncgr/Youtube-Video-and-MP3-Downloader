@@ -10,7 +10,7 @@
 .whole-panel {
     border-top: rgb(103, 103, 103) solid 2px;
     border-bottom: rgb(103, 103, 103) solid 2px;
-    padding: 15px;
+    padding: 15px 0px 15px 0px;
 }
 
 .whole-input input::placeholder {
@@ -82,6 +82,7 @@
 .download-button {
     border-radius: 10px 10px 10px 10px;
     font-size: 15px;
+    font-weight: bold;
 }
 
 .badge-danger-resolution {

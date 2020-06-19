@@ -12,14 +12,14 @@ class VideoList extends Component {
     render() {
         return (
             <tbody>
-                {this.props.info && this.props.info.formats && this.props.info.formats.filter(data => data.codecs.includes('H.264') || data.codecs.includes('av01') && data.mimeType.includes('video/mp4')).map((format, index) => {
+                {this.props.info && this.props.info.formats && this.props.info.formats.filter(data =>  data.codecs.includes('H.264') || data.codecs.includes('av01') && data.mimeType.includes('video/mp4')).map((format, index) => {
                         return (
                             <tr key={index}>
                                 <td>
                                     {format.qualityLabel} 
                                     {resoType.filter(reso => reso.resolution === format.qualityLabel).map((res,index) => {
                                         return (
-                                            <span key={index} className="badge badge-danger badge-danger-resolution ml-2">{res.alsoKnown}</span> 
+                                            <span key={index} className="badge badge-danger badge-danger-resolution ml-1">{res.alsoKnown}</span> 
                                         )
                                     })}
                                 </td>
