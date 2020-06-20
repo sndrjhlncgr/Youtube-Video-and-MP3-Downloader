@@ -13,9 +13,10 @@ router.get('/convert', async (req, res) => {
     }
 })
 
-router.get('/download/mp4', async (req, res) => {
-    const {url, formats} = req.query
-    res.json(JSON.parse(formats))
+router.get('/download/mp4', (req, res) => {
+    // res.json(res.query)
+    // const {url, formats} = req.query
+    // res.json(JSON.parse(formats))
     // const {
     //     format: {height, mimeType, width, qualityLabel, quality, container},
     //     title,
@@ -25,7 +26,6 @@ router.get('/download/mp4', async (req, res) => {
     // res.set({
     //     'Content-Disposition': headerFilename,
     // })
-
     // const file = ytdl(url, {
     //     format: container,
     //     filter: (format) =>
@@ -36,33 +36,29 @@ router.get('/download/mp4', async (req, res) => {
     //         format.qualityLabel === qualityLabel &&
     //         format.width === width,
     // }).pipe(res)
-
     // res.download(file)
 })
 
 router.get('/download/mp3', (req, res) => {
-    const {url, title} = req.query
-    const headerFilename = `attachment; filename=${title}`
-    res.set({
-        'Content-Disposition': headerFilename,
-    })
-    ytdl(url, {
+    // res.json({youtube_url,information,formats}) TESTING
+    const {youtube_url, information, formats} = req.query
+    const filename = `${information}.mp3`
+    res.setHeader('Content-disposition', 'attachment; filename=' + filename)
+    ytdl(youtube_url, {
+        audioBitrate: formats,
         format: 'mp3',
     }).pipe(res)
 })
 
-router.get('/download/audio', async (req, res) => {
-    const {url, title} = req.query
-    const headerFilename = `attachment; filename=${title}`
-    res.set({
-        'Content-Disposition': headerFilename,
-    })
-    const file = ytdl(url, {
-        filter: (format) => format.audioBitrate === 160,
-        format: 'flac',
+router.get('/download/audio', (req, res) => {
+    // res.json({youtube_url,information,formats}) TESTING
+    const {youtube_url, information, formats} = req.query
+    const filename = `${information}.mp3`
+    res.setHeader('Content-disposition', 'attachment; filename=' + filename)
+    ytdl(youtube_url, {
+        audioBitrate: formats,
+        format: 'mp3',
     }).pipe(res)
-
-    res.download(file)
 })
 
 module.exports = router

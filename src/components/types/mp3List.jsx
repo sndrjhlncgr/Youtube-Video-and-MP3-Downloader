@@ -25,8 +25,8 @@ class Mp3List extends Component {
                                 <td> 
                                     <button type="button" className="btn btn-success download-button btn-sm" onClick={e => {
                                         e.preventDefault();
-                                        const {title} = this.props.info
-                                        downloadMp3(this.props.url,title)
+                                        const {url, info} = this.props
+                                        downloadMp3(url,info,format)
                                     }}>Download <FontAwesomeIcon className="ml-1" icon={faChevronCircleDown}/></button>
                                 </td>
                             </tr>

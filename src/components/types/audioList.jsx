@@ -11,7 +11,7 @@ class AudioList extends Component {
     render() {
         return (
             <tbody>
-                {this.props.info && this.props.info.formats && this.props.info.formats.filter(data => data.mimeType.includes('audio') && data.audioBitrate > 128).map((format, index) => {
+                {this.props.info && this.props.info.formats && this.props.info.formats.filter(data => data.mimeType.includes('audio')).map((format, index) => {
                         return (
                             <tr key={index}>
                                 <td>
@@ -19,13 +19,13 @@ class AudioList extends Component {
                                     <span className="badge badge-success badge-success-resolution ml-2">Kbps</span>
                                 </td>
                                 <td>
-                                    .flac
+                                    .mp3
                                 </td>
                                 <td> 
                                     <button type="button" className="btn btn-success download-button btn-sm" onClick={e => {
                                         e.preventDefault();
-                                        const {title} = this.props.info
-                                        downloadAudio(this.props.url,title)
+                                        const {url, info} = this.props
+                                        downloadAudio(url,info,format)
                                     }}>Download <FontAwesomeIcon className="ml-1" icon={faChevronCircleDown}/></button>
                                 </td>
                             </tr>
