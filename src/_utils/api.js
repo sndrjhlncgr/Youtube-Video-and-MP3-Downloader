@@ -33,7 +33,7 @@ export const downloadMp4 = (url,format,info) =>  {
         },
     })
     .then(response => {
-        
+        console.log(response)
     })
     
 }

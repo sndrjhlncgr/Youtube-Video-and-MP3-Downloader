@@ -1,6 +1,15 @@
+const Fs = require('fs')
+const Path = require('path')
+
 const express = require('express')
 const router = express.Router()
 const ytdl = require('ytdl-core')
+
+// path to folder where i save, remember
+const path = Path.resolve(__dirname, 'files','sddadd.mp4')
+
+
+
 
 router.get('/convert', async (req, res) => {
     try {
@@ -13,30 +22,46 @@ router.get('/convert', async (req, res) => {
     }
 })
 
-router.get('/download/mp4', (req, res) => {
-    // res.json(res.query)
-    // const {url, formats} = req.query
-    // res.json(JSON.parse(formats))
-    // const {
-    //     format: {height, mimeType, width, qualityLabel, quality, container},
-    //     title,
-    // } = JSON.parse(formats)
-    // console.log(height, mimeType, width, qualityLabel, quality, container,url,title)
-    // const headerFilename = `attachment; filename=${title}`
-    // res.set({
-    //     'Content-Disposition': headerFilename,
-    // })
-    // const file = ytdl(url, {
-    //     format: container,
-    //     filter: (format) =>
-    //         format.container === container &&
-    //         format.height === height &&
-    //         format.mimeType === mimeType &&
-    //         format.quality === quality &&
-    //         format.qualityLabel === qualityLabel &&
-    //         format.width === width,
-    // }).pipe(res)
-    // res.download(file)
+router.get('/download/mp4', async (req, res) => {
+    const {url, formats} = await req.query
+    const videoFormats = JSON.parse(formats)
+
+    const {
+        video_formats: {height, mimeType, width, qualityLabel, quality, container},
+        title,
+    } = videoFormats
+
+    const headerFilename = `attachment; filename=${title}`
+    res.set({
+        'Content-Disposition': headerFilename,
+    })
+    const videoFile = await ytdl(url, {
+        format: container,
+        filter: (format) =>
+            format.container === container &&
+            format.height === height &&
+            format.mimeType === mimeType &&
+            format.quality === quality &&
+            format.qualityLabel === qualityLabel &&
+            format.width === width,
+    });
+ 
+    videoFile.pipe(Fs.createWriteStream(path))
+
+    const promise =  new Promise((resolve, reject) => {
+        // console.log(videoFile._events.end)
+        videoFile.on('end' ,() => {
+            resolve('Saved Successfully')
+        })
+        videoFile.on('error' ,(err) => {
+            reject(err)
+        })
+    })
+
+    promise.then((value) => {
+        res.json(value)
+    });
+      
 })
 
 router.get('/download/mp3', (req, res) => {
