@@ -49,7 +49,6 @@ router.get('/download/mp4', async (req, res) => {
     videoFile.pipe(Fs.createWriteStream(path))
 
     const promise =  new Promise((resolve, reject) => {
-        // console.log(videoFile._events.end)
         videoFile.on('end' ,() => {
             resolve('Saved Successfully')
         })
