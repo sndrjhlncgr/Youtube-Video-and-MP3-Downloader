@@ -6,6 +6,7 @@ import { faFileAudio } from '@fortawesome/free-solid-svg-icons'
 import VideoList from '../types/videoList'
 import Mp3List from '../types/mp3List'
 import AudioList from '../types/audioList'
+import ColumnTypes from '../helpers/columnTypes'
 
 class ConvertPanel extends Component {
     constructor(props) {
@@ -87,11 +88,7 @@ class ConvertPanel extends Component {
                             <div className={`tab-pane fade show ${this.state.eventkey === "video" ? 'active': ''}`} role="tabpanel" aria-labelledby="home-tab">
                                 <table className="table table-borderless mt-2">
                                     <thead>
-                                        <tr>
-                                            <th scope="col">Resolution</th>
-                                            <th scope="col">File Type</th>
-                                            <th scope="col">Download</th>
-                                        </tr>
+                                        <ColumnTypes/>
                                     </thead>
                                         <VideoList info={this.state.info}  url={this.props.url}/>
                                 </table>
@@ -99,11 +96,7 @@ class ConvertPanel extends Component {
                             <div className={`tab-pane fade show ${this.state.eventkey === "mp3" ? 'active': ''}`} role="tabpanel" aria-labelledby="profile-tab">
                                 <table className="table table-borderless mt-2">
                                     <thead>
-                                        <tr>
-                                            <th scope="col">Resolution</th>
-                                            <th scope="col">File Type</th>
-                                            <th scope="col">Download</th>
-                                        </tr>
+                                        <ColumnTypes/>
                                     </thead>
                                         <Mp3List info={this.state.info} url={this.props.url}/>
                                 </table>
@@ -111,11 +104,7 @@ class ConvertPanel extends Component {
                             <div className={`tab-pane fade show ${this.state.eventkey === "audio" ? 'active': ''}`} role="tabpanel" aria-labelledby="contact-tab">
                                 <table className="table table-borderless mt-2">
                                     <thead>
-                                        <tr>
-                                            <th scope="col">Resolution</th>
-                                            <th scope="col">File Type</th>
-                                            <th scope="col">Download</th>
-                                        </tr>
+                                        <ColumnTypes/>
                                     </thead>
                                     <AudioList info={this.state.info}  url={this.props.url}/>
                                 </table>
