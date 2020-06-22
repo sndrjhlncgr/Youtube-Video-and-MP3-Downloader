@@ -5,12 +5,6 @@ const express = require('express')
 const router = express.Router()
 const ytdl = require('ytdl-core')
 
-// path to folder where i save, remember
-const path = Path.resolve(__dirname, 'files','sddadd.mp4')
-
-
-
-
 router.get('/convert', async (req, res) => {
     try {
         const url = req.query.URL
@@ -25,16 +19,13 @@ router.get('/convert', async (req, res) => {
 router.get('/download/mp4', async (req, res) => {
     const {url, formats} = await req.query
     const videoFormats = JSON.parse(formats)
-
     const {
         video_formats: {height, mimeType, width, qualityLabel, quality, container},
         title,
     } = videoFormats
 
-    const headerFilename = `attachment; filename=${title}`
-    res.set({
-        'Content-Disposition': headerFilename,
-    })
+    const path = Path.resolve(__dirname, 'files', title)
+
     const videoFile = await ytdl(url, {
         format: container,
         filter: (format) =>
@@ -48,7 +39,7 @@ router.get('/download/mp4', async (req, res) => {
  
     videoFile.pipe(Fs.createWriteStream(path))
 
-    const promise =  new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
         videoFile.on('end' ,() => {
             resolve('Saved Successfully')
         })
