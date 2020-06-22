@@ -24,7 +24,8 @@ router.get('/download/mp4', async (req, res) => {
         title,
     } = videoFormats
 
-    const path = Path.resolve(__dirname, 'files', title)
+    const videopath = Path.resolve(__dirname, 'files', `${title}.mp4`)
+    const audiopath = Path.resolve(__dirname, 'files', `${title}.mp3`)
 
     const videoFile = await ytdl(url, {
         format: container,
@@ -36,14 +37,26 @@ router.get('/download/mp4', async (req, res) => {
             format.qualityLabel === qualityLabel &&
             format.width === width,
     });
- 
-    videoFile.pipe(Fs.createWriteStream(path))
 
+    const audioFile = await ytdl(url, {
+        format: 'mp3',
+    });
+ 
+    videoFile.pipe(Fs.createWriteStream(videopath))
+    audioFile.pipe(Fs.createWriteStream(audiopath))
+
+    // dont mind this haha
     const promise = new Promise((resolve, reject) => {
         videoFile.on('end' ,() => {
             resolve('Saved Successfully')
         })
+        audioFile.on('end' ,() => {
+            resolve('Saved  musicSuccessfully')
+        })
         videoFile.on('error' ,(err) => {
+            reject(err)
+        })
+        audioFile.on('error' ,() => {
             reject(err)
         })
     })
