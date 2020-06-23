@@ -3,9 +3,12 @@ const Path = require('path')
 const express = require('express')
 const router = express.Router()
 const ytdl = require('ytdl-core')
+const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
+const ffmpeg = require('fluent-ffmpeg');
+ffmpeg.setFfmpegPath(ffmpegPath);
+
 
 router.get('/convert', async (req, res) => {
-
     try {
         const url = req.query.URL
         await ytdl.getInfo(url, (err, info) => {
@@ -45,18 +48,41 @@ router.get('/download/mp4', async (req, res) => {
     videoFile.pipe(Fs.createWriteStream(videopath))
     audioFile.pipe(Fs.createWriteStream(audiopath))
 
+    // const video = Path.resolve(`./routes/api/files/${title}.mp4`);
+    // const audio = Path.resolve(`./routes/api/files/${title}.mp4`);
+
     // dont mind this haha
     const promise = new Promise((resolve, reject) => {
         videoFile.on('end' ,() => {
-            resolve('Saved Successfully')
-        })
-        audioFile.on('end' ,() => {
-            resolve('Saved  musicSuccessfully')
+            audioFile.on('end' ,() => {
+                resolve('Saved  Successfully')
+            })
         })
         videoFile.on('error' ,(err) => {
-            reject(err)
+            audioFile.on('error' ,(errs) => {
+                reject(errs)
+            })
         })
-        audioFile.on('error' ,() => {
+    })
+
+    promise.then((value) => {
+        res.json(value)
+    });
+      
+})
+
+router.get('/convertFile', (req,res) => {
+    const fullVid = new ffmpeg()
+    .addInput(Path.resolve(`./routes/api/files/${req.query.title}.mp4`))
+    .addInput(Path.resolve(`./routes/api/files/${req.query.title}.mp3`))
+    .saveToFile(Path.resolve(__dirname, 'files', `this.mp4`));
+
+    const promise = new Promise((resolve, reject) => {
+        fullVid.on('end' ,() => {
+            resolve('Saved Successfully')
+        })
+
+        fullVid.on('error' ,(err) => {
             reject(err)
         })
     })

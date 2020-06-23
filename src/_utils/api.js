@@ -12,6 +12,18 @@ export const convertLink = (url,callback) =>  {
         callback(res)
     })
 }
+
+export const convertFile = (title) => {
+    axios.get(`${API_LINK}/convertFile`, {
+        params: {
+            title: title,
+        },
+    })
+    .then(response => {
+        console.log(response)
+    })
+}
+
 export const downloadMp4 = (url,format,info) =>  {
     const formats = {
         url:url,
@@ -37,6 +49,8 @@ export const downloadMp4 = (url,format,info) =>  {
     })
     
 }
+
+
 
 export const downloadMp3 = (url,info,format) =>  {
     // axios.get(`${API_LINK}/download/mp3`, {
