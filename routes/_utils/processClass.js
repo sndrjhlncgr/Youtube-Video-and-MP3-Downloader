@@ -38,9 +38,9 @@ const getVideoContent = async (url, formats, res) => {
         })
     })
 
-    promise.then(value => {
+    promise.then((value) => {
         res(value)
-    }) 
+    })
 }
 
 const getAudioFile = async (url, filename, res) => {
@@ -59,24 +59,23 @@ const getAudioFile = async (url, filename, res) => {
         })
     })
 
-    promise.then(value => {
+    promise.then((value) => {
         res(value)
-    }) 
+    })
 }
+
 const convertVideoAndAudio = (url, videoFormats) => {
     const result = []
     this.getVideoContent(url, videoFormats, (response) => {
         result.push(response)
     })
 
-    this.getAudioFile(url,videoFormats.filename, (response) => {
+    this.getAudioFile(url, videoFormats.filename, (response) => {
         result.push(response)
     })
 
     const result = result
 
     //here you need to put resposne
-
-    
 }
-module.exports = {getVideoContent, getAudioFile}
+module.exports = {getVideoContent, getAudioFile, convertVideoAndAudio}
