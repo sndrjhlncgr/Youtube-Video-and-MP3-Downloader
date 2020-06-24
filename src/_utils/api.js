@@ -35,7 +35,7 @@ export const downloadMp4 = (url,format,info) =>  {
             quality: format.quality,
             container: format.container
         },
-        title: `${info.video_id}`
+        filename: `${info.video_id}`
     }
 
     axios.get(`${API_LINK}/download/mp4`, {
