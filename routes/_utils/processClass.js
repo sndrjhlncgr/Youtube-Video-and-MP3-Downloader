@@ -16,66 +16,87 @@ const getVideoContent = async (url, formats, res) => {
     } = formats
     const videopath = Path.resolve(__dirname, '../api/files', `${filename}.mp4`)
 
-    const videoFile = await ytdl(url, {
-        format: container,
-        filter: (format) =>
-            format.container === container &&
-            format.height === height &&
-            format.mimeType === mimeType &&
-            format.quality === quality &&
-            format.qualityLabel === qualityLabel &&
-            format.width === width,
-    })
-
-    videoFile.pipe(Fs.createWriteStream(videopath))
-
-    const promise = new Promise((resolve, reject) => {
-        videoFile.on('finish', () => {
-            resolve('SAVED_VIDEO_SUCCESSFULLY')
+    try {
+        const videoFile = await ytdl(url, {
+            format: container,
+            filter: (format) =>
+                format.container === container &&
+                format.height === height &&
+                format.mimeType === mimeType &&
+                format.quality === quality &&
+                format.qualityLabel === qualityLabel &&
+                format.width === width,
         })
-        videoFile.on('error', (err) => {
-            reject('ERROR')
-        })
-    })
 
-    promise.then((value) => {
-        res(value)
-    })
+        videoFile.pipe(Fs.createWriteStream(videopath))
+
+        await new Promise((resolve, reject) => {
+            videoFile.on('finish', () => {
+                resolve('SAVED_VIDEO_SUCCESSFULLY')
+            })
+            videoFile.on('error', (err) => {
+                reject()
+            })
+        }).then((value) => {
+            res(value)
+        })
+    } catch (err) {
+        console.error(err)
+    }
 }
 
 const getAudioFile = async (url, filename, res) => {
     const audiopath = Path.resolve(__dirname, '../api/files', `${filename}.mp3`)
-    const audioFile = await ytdl(url, {
-        format: 'mp3',
-    })
-    audioFile.pipe(Fs.createWriteStream(audiopath))
-
-    const promise = new Promise((resolve, reject) => {
-        audioFile.on('finish', () => {
-            resolve('SAVED_AUDIO_SUCCESSFULLY')
+    try {
+        const audioFile = await ytdl(url, {
+            format: 'mp3',
         })
-        audioFile.on('error', (err) => {
-            reject('ERROR')
-        })
-    })
+        audioFile.pipe(Fs.createWriteStream(audiopath))
 
-    promise.then((value) => {
-        res(value)
-    })
+        await new Promise((resolve, reject) => {
+            audioFile.on('finish', () => {
+                resolve('SAVED_AUDIO_SUCCESSFULLY')
+            })
+            audioFile.on('error', (err) => {
+                reject()
+            })
+        }).then((value) => {
+            res(value)
+        })
+    } catch (err) {
+        console.error(err)
+    }
 }
 
-const convertVideoAndAudio = (url, videoFormats) => {
-    const result = []
-    this.getVideoContent(url, videoFormats, (response) => {
-        result.push(response)
-    })
-
-    this.getAudioFile(url, videoFormats.filename, (response) => {
-        result.push(response)
-    })
-
-    const result = result
-
-    //here you need to put resposne
+const videoProcessResult = async (url,videoFormats) => {
+   try {
+        await getVideoContent(url, videoFormats, (response) => {
+            return response === 'SAVED_VIDEO_SUCCESSFULLY'
+        })
+   } catch(err) {
+       return err
+   }
 }
-module.exports = {getVideoContent, getAudioFile, convertVideoAndAudio}
+
+const audioProcessResult = async (url,videoFormats) => {
+    try {
+        await getAudioFile(url, videoFormats.filename, (response) => {
+            return response === 'SAVED_AUDIO_SUCCESSFULLY'
+        })
+    } catch(err) {
+        return err
+    }
+ }
+
+
+const convertVideoAndAudio = async (url,videoFormats) => {
+    try {
+        await videoProcessResult(url,videoFormats)
+        await audioProcessResult(url,videoFormats)
+        return true
+    } catch (err) {
+        return err
+    }
+}
+
+module.exports = {convertVideoAndAudio}

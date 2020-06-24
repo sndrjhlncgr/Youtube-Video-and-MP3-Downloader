@@ -8,7 +8,11 @@ const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path
 const ffmpeg = require('fluent-ffmpeg')
 ffmpeg.setFfmpegPath(ffmpegPath)
 
-const {convertVideoAndAudio} = require('../_utils/processClass')
+const {
+    getVideoContent,
+    getAudioFile,
+    convertVideoAndAudio,
+} = require('../_utils/processClass')
 
 router.get('/convert', async (req, res) => {
     try {
@@ -22,13 +26,10 @@ router.get('/convert', async (req, res) => {
 })
 
 router.get('/download/mp4', async (req, res) => {
-    const {url, formats} = await req.query
+    const {url, formats} = req.query
     const videoFormats = JSON.parse(formats)
-    if (videoFormats) {
-        if(convertVideoAndAudio(url, videoFormats)) {
-
-        }
-    }
+    console.log(convertVideoAndAudio(url,videoFormats))
+   
 })
 
 router.get('/convertFile', (req, res) => {
