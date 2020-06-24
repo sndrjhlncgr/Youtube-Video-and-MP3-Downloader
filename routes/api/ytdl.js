@@ -29,10 +29,6 @@ router.get('/download/mp4', async (req, res) => {
 
         }
     }
-
-    // promise.then((value) => {
-    //     res.json(value)
-    // })
 })
 
 router.get('/convertFile', (req, res) => {
