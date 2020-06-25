@@ -26,23 +26,35 @@ router.get('/download/mp4', async (req, res) => {
     if(!videoFormats)   {
         res.json({
             type: 'ERROR',
-            value:false
+            payload: 'NO_FORMATS'
         })
     }
 
-    if(!await convertVideoAndAudio(url,videoFormats,res))  {
+    try {
+        const output = Path.resolve(__dirname,`./api/files/${videoFormats.videoFilename}.mp4`)
+        if(!await convertVideoAndAudio(url,videoFormats,res))  {
+            res.json({
+                type: 'ERROR',
+                payload:'UNABLED_TO_DOWNLOAD'
+            })
+        }
+
+        await mergeVideoAndAudio(videoFormats.filename,videoFormats.videoFilename, (response) => {
+            switch(response)    {
+                case 'MERGE_AUDIO_AND_VIDEO_SUCCESSFULLY':
+                    res.download(output)
+                default:
+                    res.json({
+                        type: 'ERROR',
+                        payload:'UNABLED_TO_DOWNLOAD'
+                    })
+            }
+        })
+    } catch(err) {
         res.json({
-            type: 'ERROR',
-            value:false
+            payload: err
         })
     }
-
-    await mergeVideoAndAudio(videoFormats.filename,videoFormats.videoFilename, (response) => {
-        res.json({
-            type: response
-        })
-    })
-
 })
 
 router.get('/download/mp3', (req, res) => {
