@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {resoType} from '../helpers/resolutionTypes'
-import {downloadMp4,convertFile} from '../../_utils/api'
+import {downloadMp4} from '../../_utils/api'
 import { faChevronCircleDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -32,11 +32,6 @@ class VideoList extends Component {
                                         const {url, info} = this.props
                                         downloadMp4(url,format,info)
                                     }}>Download <FontAwesomeIcon className="ml-1" icon={faChevronCircleDown}/></button>
-                                    <button type="button" className="btn btn-success btn-sm download-button" onClick={e => {
-                                        e.preventDefault();
-                                        const {url, info} = this.props
-                                        convertFile(info.video_id)
-                                    }}>Cont <FontAwesomeIcon className="ml-1" icon={faChevronCircleDown}/></button>
                                 </td>
                             </tr>
                         )
