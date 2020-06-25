@@ -31,7 +31,7 @@ router.get('/download/mp4', async (req, res) => {
     }
 
     try {
-        const output = Path.resolve(__dirname,`./api/files/${videoFormats.videoFilename}.mp4`)
+        const output = Path.resolve(__dirname,`./files/${videoFormats.videoFilename}.mp4`)
         if(!await convertVideoAndAudio(url,videoFormats,res))  {
             res.json({
                 type: 'ERROR',
@@ -42,7 +42,7 @@ router.get('/download/mp4', async (req, res) => {
         await mergeVideoAndAudio(videoFormats.filename,videoFormats.videoFilename, (response) => {
             switch(response)    {
                 case 'MERGE_AUDIO_AND_VIDEO_SUCCESSFULLY':
-                    res.download(output)
+                    break;
                 default:
                     res.json({
                         type: 'ERROR',
@@ -56,6 +56,7 @@ router.get('/download/mp4', async (req, res) => {
         })
     }
 })
+
 
 router.get('/download/mp3', (req, res) => {
     const {youtube_url, information, formats} = req.query

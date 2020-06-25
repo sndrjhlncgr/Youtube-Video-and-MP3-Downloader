@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 const API_LINK= 'http://localhost:3000/api'
 
 export const convertLink = (url,callback) =>  {
@@ -15,7 +14,7 @@ export const convertLink = (url,callback) =>  {
 }
 
 
-export const downloadMp4 = (url,format,info) =>  {
+export const downloadMp4 = async (url,format,info) =>  {
     const formats = {
         url:url,
         video_formats: {
@@ -30,14 +29,14 @@ export const downloadMp4 = (url,format,info) =>  {
         videoFilename: `${info.title}`
     }
 
-    axios.get(`${API_LINK}/download/mp4`, {
+    await axios.get(`${API_LINK}/download/mp4`, {
         params: {
             url:url,
             formats: JSON.stringify(formats)
         },
     })
     .then(response => {
-        console.log(response)
+        
     })
     
 }
