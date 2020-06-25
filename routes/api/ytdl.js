@@ -38,13 +38,14 @@ router.get('/download/mp4', async (req, res) => {
     }
 
     await mergeVideoAndAudio(videoFormats.filename,videoFormats.videoFilename, (response) => {
-        console.log(response)
+        res.json({
+            type: response
+        })
     })
 
 })
 
 router.get('/download/mp3', (req, res) => {
-    // res.json({youtube_url,information,formats}) TESTING
     const {youtube_url, information, formats} = req.query
     const filename = `${information}.mp3`
     res.setHeader('Content-disposition', 'attachment; filename=' + filename)
@@ -55,7 +56,6 @@ router.get('/download/mp3', (req, res) => {
 })
 
 router.get('/download/audio', (req, res) => {
-    // res.json({youtube_url,information,formats}) TESTING
     const {youtube_url, information, formats} = req.query
     const filename = `${information}.mp3`
     res.setHeader('Content-disposition', 'attachment; filename=' + filename)
