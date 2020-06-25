@@ -4,14 +4,9 @@ const express = require('express')
 const router = express.Router()
 const ytdl = require('ytdl-core')
 
-const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path
-const ffmpeg = require('fluent-ffmpeg')
-ffmpeg.setFfmpegPath(ffmpegPath)
-
 const {
-    getVideoContent,
-    getAudioFile,
     convertVideoAndAudio,
+    mergeVideoAndAudio
 } = require('../_utils/processClass')
 
 router.get('/convert', async (req, res) => {
@@ -28,29 +23,24 @@ router.get('/convert', async (req, res) => {
 router.get('/download/mp4', async (req, res) => {
     const {url, formats} = req.query
     const videoFormats = JSON.parse(formats)
-    console.log(convertVideoAndAudio(url,videoFormats))
-   
-})
-
-router.get('/convertFile', (req, res) => {
-    const fullVid = new ffmpeg()
-        .addInput(Path.resolve(`./routes/api/files/${req.query.title}.mp4`))
-        .addInput(Path.resolve(`./routes/api/files/${req.query.title}.mp3`))
-        .saveToFile(Path.resolve(__dirname, 'files', `this.mp4`))
-
-    const promise = new Promise((resolve, reject) => {
-        fullVid.on('end', () => {
-            resolve('Saved Successfully')
+    if(!videoFormats)   {
+        res.json({
+            type: 'ERROR',
+            value:false
         })
+    }
 
-        fullVid.on('error', (err) => {
-            reject(err)
+    if(!await convertVideoAndAudio(url,videoFormats,res))  {
+        res.json({
+            type: 'ERROR',
+            value:false
         })
+    }
+
+    await mergeVideoAndAudio(videoFormats.filename,videoFormats.videoFilename, (response) => {
+        console.log(response)
     })
 
-    promise.then((value) => {
-        res.json(value)
-    })
 })
 
 router.get('/download/mp3', (req, res) => {
