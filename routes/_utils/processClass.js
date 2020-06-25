@@ -1,8 +1,12 @@
 const Fs = require('fs')
 const Path = require('path')
 const ytdl = require('ytdl-core')
+const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path
+const ffmpeg = require('fluent-ffmpeg')
+ffmpeg.setFfmpegPath(ffmpegPath)
 
-const getVideoContent = async (url, formats, res) => {
+
+const getVideoContent = async (url, formats, res,response) => {
     const {
         video_formats: {
             height,
@@ -35,17 +39,24 @@ const getVideoContent = async (url, formats, res) => {
                 resolve('SAVED_VIDEO_SUCCESSFULLY')
             })
             videoFile.on('error', (err) => {
-                reject()
+                res.json({
+                    type: 'ERROR',
+                    error: err
+                })
+                reject('ERROR')
             })
         }).then((value) => {
-            res(value)
+            response(value)
         })
     } catch (err) {
-        console.error(err)
+        res.json({
+            type: 'ERROR',
+            error: err
+        })
     }
 }
 
-const getAudioFile = async (url, filename, res) => {
+const getAudioFile = async (url, filename, res, response) => {
     const audiopath = Path.resolve(__dirname, '../api/files', `${filename}.mp3`)
     try {
         const audioFile = await ytdl(url, {
@@ -58,45 +69,80 @@ const getAudioFile = async (url, filename, res) => {
                 resolve('SAVED_AUDIO_SUCCESSFULLY')
             })
             audioFile.on('error', (err) => {
-                reject()
+                res.json({
+                    type: 'ERROR',
+                    error: err
+                })
+                reject('ERROR')
             })
         }).then((value) => {
-            res(value)
+            response(value)
         })
     } catch (err) {
-        console.error(err)
+        res.json({
+            type: 'ERROR',
+            error: err
+        })
     }
 }
 
-const videoProcessResult = async (url,videoFormats) => {
+const videoProcessResult = async (url,videoFormats,res) => {
    try {
-        await getVideoContent(url, videoFormats, (response) => {
+        await getVideoContent(url, videoFormats,res, (response) => {
             return response === 'SAVED_VIDEO_SUCCESSFULLY'
         })
    } catch(err) {
-       return err
+        res.json({
+            type: 'ERROR',
+            error: err
+        })
    }
 }
 
-const audioProcessResult = async (url,videoFormats) => {
+const audioProcessResult = async (url,videoFormats,res) => {
     try {
-        await getAudioFile(url, videoFormats.filename, (response) => {
+        await getAudioFile(url, videoFormats.filename,res, (response) => {
             return response === 'SAVED_AUDIO_SUCCESSFULLY'
         })
     } catch(err) {
-        return err
+        res.json({
+            type: 'ERROR',
+            error: err
+        })
     }
  }
 
 
-const convertVideoAndAudio = async (url,videoFormats) => {
+const convertVideoAndAudio = async (url,videoFormats,res) => {
     try {
-        await videoProcessResult(url,videoFormats)
-        await audioProcessResult(url,videoFormats)
+        await videoProcessResult(url,videoFormats,res)
+        await audioProcessResult(url,videoFormats,res)
         return true
     } catch (err) {
-        return err
+        res.json({
+            type: 'ERROR',
+            error: err
+        })
     }
 }
 
-module.exports = {convertVideoAndAudio}
+const mergeVideoAndAudio = async (tempFilename, filename, response) => {
+    const fullVid = new ffmpeg()
+    .addInput(Path.resolve(`./routes/api/files/${tempFilename}.mp4`))
+    .addInput(Path.resolve(`./routes/api/files/${tempFilename}.mp3`))
+    .saveToFile(Path.resolve(`./routes/api/files/${filename}.mp4`))
+
+    await new Promise((resolve, reject) => {
+        fullVid.on('end', () => {
+            resolve('MERGE_AUDIO_AND_VIDEO_SUCCESSFULLY')
+        })
+        fullVid.on('error', (err) => {
+            reject(err)
+        })
+    }).then((value) => {
+        response(value)
+    })
+}
+
+
+module.exports = {convertVideoAndAudio,mergeVideoAndAudio}
