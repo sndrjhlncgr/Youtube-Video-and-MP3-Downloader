@@ -42,6 +42,7 @@ router.get('/download/mp4', async (req, res) => {
         await mergeVideoAndAudio(videoFormats.filename,videoFormats.videoFilename, (response) => {
             switch(response)    {
                 case 'MERGE_AUDIO_AND_VIDEO_SUCCESSFULLY':
+                   
                     break;
                 default:
                     res.json({
@@ -58,21 +59,21 @@ router.get('/download/mp4', async (req, res) => {
 })
 
 
-router.get('/download/mp3', (req, res) => {
+router.get('/download/mp3', async (req, res) => {
     const {youtube_url, information, formats} = req.query
     const filename = `${information}.mp3`
     res.setHeader('Content-disposition', 'attachment; filename=' + filename)
-    ytdl(youtube_url, {
+    await ytdl(youtube_url, {
         audioBitrate: formats,
         format: 'mp3',
     }).pipe(res)
 })
 
-router.get('/download/audio', (req, res) => {
+router.get('/download/audio', async (req, res) => {
     const {youtube_url, information, formats} = req.query
     const filename = `${information}.mp3`
     res.setHeader('Content-disposition', 'attachment; filename=' + filename)
-    ytdl(youtube_url, {
+    await ytdl(youtube_url, {
         audioBitrate: formats,
         format: 'mp3',
     }).pipe(res)
