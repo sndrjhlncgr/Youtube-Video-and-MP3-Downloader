@@ -40,9 +40,10 @@ router.get('/download/mp4', async (req, res) => {
         }
 
         await mergeVideoAndAudio(videoFormats.filename,videoFormats.videoFilename, (response) => {
-            switch(response)    {
+            const action = JSON.parse(response)
+            switch(action.type)    {
                 case 'MERGE_AUDIO_AND_VIDEO_SUCCESSFULLY':
-                   
+                    console.log(action)
                     break;
                 default:
                     res.json({

@@ -134,7 +134,10 @@ const mergeVideoAndAudio = async (tempFilename, filename, response) => {
 
     await new Promise((resolve, reject) => {
         fullVid.on('end', () => {
-            resolve('MERGE_AUDIO_AND_VIDEO_SUCCESSFULLY')
+            resolve(JSON.stringify({
+                type: 'MERGE_AUDIO_AND_VIDEO_SUCCESSFULLY',
+                path: Path.resolve(`./routes/api/files/${filename}.mp4`),
+            }))
         })
         fullVid.on('error', (err) => {
             reject(err)
