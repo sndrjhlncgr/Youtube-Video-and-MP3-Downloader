@@ -9,6 +9,13 @@ class VideoList extends Component {
     constructor(props) {
         super(props)
     }
+
+    state = {
+        link: '',
+        filename:'',
+        type:''
+    }
+
     render() {
         return (
             <tbody>
@@ -27,11 +34,30 @@ class VideoList extends Component {
                                     .{format.container}
                                 </td>
                                 <td> 
-                                    <button type="button" className="btn btn-success btn-sm download-button" onClick={e => {
+                                    {this.state.type.length === 0 ? <button type="button" className="btn btn-success btn-sm download-button" onClick={e => {
                                         e.preventDefault();
                                         const {url, info} = this.props
-                                        downloadMp4(url,format,info)
+                                        downloadMp4(url,format,info, (res) => {
+                                            switch(res.data.type) {
+                                                case 'MERGE_AUDIO_AND_VIDEO_SUCCESSFULLY':
+                                                    this.setState({
+                                                        link: res.data.link,
+                                                        filename:res.data.filename,
+                                                        type: res.data.type
+                                                    })
+                                                    break;
+                                                default:
+                                                    return ''
+                                            }
+                                        })
                                     }}>Download <FontAwesomeIcon className="ml-1" icon={faChevronCircleDown}/></button>
+                                :
+                                    <button onClick={(e) => {
+                                        e.preventDefault()
+                                        console.log(this.state)
+                                        window.location.href= `http://localhost:3000/api/download/${this.state.filename}`
+                                    }}>Download Link</button>
+                                }
                                 </td>
                             </tr>
                         )

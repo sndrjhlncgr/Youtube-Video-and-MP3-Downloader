@@ -43,12 +43,19 @@ router.get('/download/mp4', async (req, res) => {
             const action = JSON.parse(response)
             switch(action.type)    {
                 case 'MERGE_AUDIO_AND_VIDEO_SUCCESSFULLY':
+                    res.json({
+                        type: action.type,
+                        filename: action.payload.filename,
+                        link: `/download/${action.payload.filename}`
+                    })
+                    break;
+                case 'MERGE_AUDIO_AND_VIDEO_ERROR':
                     console.log(action)
                     break;
                 default:
                     res.json({
-                        type: 'ERROR',
-                        payload:'UNABLED_TO_DOWNLOAD'
+                        type: 'NULL',
+                        payload:'UNDEFINED'
                     })
             }
         })
@@ -59,6 +66,11 @@ router.get('/download/mp4', async (req, res) => {
     }
 })
 
+router.get('/download/:filename', (req, res) => {
+    const {filename} = req.params
+    const video = Path.resolve(`./routes/api/files/${filename}`);
+    res.download(video)
+})
 
 router.get('/download/mp3', async (req, res) => {
     const {youtube_url, information, formats} = req.query

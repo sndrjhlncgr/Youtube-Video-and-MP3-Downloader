@@ -14,7 +14,7 @@ export const convertLink = (url,callback) =>  {
 }
 
 
-export const downloadMp4 = async (url,format,info) =>  {
+export const downloadMp4 = async (url,format,info, res) =>  {
     const formats = {
         url:url,
         video_formats: {
@@ -36,7 +36,7 @@ export const downloadMp4 = async (url,format,info) =>  {
         },
     })
     .then(response => {
-        
+        res(response)
     })
     
 }
