@@ -28,11 +28,11 @@ Clone the repo:
 
  Start the project:
  
- ```bash
+ ```
   $ npm start
  ```
   build the project:
-  ```bash
+  ```
   $ npm run build
  ```
  ***Note***: in the future maybe i will remove `npm run build`. 
