@@ -6,7 +6,7 @@ import ConvertPanel from './convertPanel.jsx'
 class VideoInput extends Component {
     state = {
         checkLink: false,
-        url: '',
+        url: 'https://youtu.be/vDNG5AkNfcs?list=RDUSNFrnSQEfU',
         videoInfo: {}
     }
     componentDidMount() {
@@ -50,7 +50,7 @@ class VideoInput extends Component {
                     <div className="input-group-append">
                         <button
                             type="button"
-                            className={`btn btn-light form-control convert-button`}
+                            className={`btn btn-light form-control go-button`}
                             disabled={this.state.url.length === 0}
                             onClick={(e) => {
                                 e.preventDefault()

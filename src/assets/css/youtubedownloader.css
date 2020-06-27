@@ -28,7 +28,7 @@
     box-shadow: none;
 }
 
-.convert-button {
+.go-button {
     font-size: 18px;
     border-radius: 0px 10px 10px 0px;
     width: (100% - 200px);
@@ -37,8 +37,8 @@
     background-color: rgb(46, 164, 79) !important;
 }
 
-.convert-button:hover,
-.convert-button:active {
+.go-button:hover,
+.go-button:active {
     font-size: 18px;
     border-radius: 0px 10px 10px 0px;
     width: (100% - 200px);
@@ -107,4 +107,17 @@
     border-radius: 10px 10px 10px 10px;
     font-size: 15px;
     font-weight: bold;
+}
+
+.processing-view {
+    border-radius: 10px 10px 10px 10px;
+    font-size: 17px;
+    font-weight: bold;
+ 
+}
+
+.processing-view .convert-spinner {
+    font-size: 11px;
+    width: 18px;
+    height:18px;
 }
