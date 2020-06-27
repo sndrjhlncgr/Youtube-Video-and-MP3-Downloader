@@ -59,7 +59,7 @@
 }
 
 .youtube-categories .nav-item {
-    width: calc(100% - 73%) !important;
+    width: calc(100% - 67%) !important;
     cursor: pointer !important;
 }
 .nav-link {
