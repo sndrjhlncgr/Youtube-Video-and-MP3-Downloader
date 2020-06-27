@@ -41,6 +41,9 @@ export const downloadMp4 = async (url,format,info, res) =>  {
     
 }
 
+export const downloadVideo = (link) => {
+    window.location.href = `${API_LINK}${link}`
+}
 
 
 export const downloadMp3 = (url,info,format) =>  {
@@ -72,4 +75,4 @@ export const downloadAudio = (url,info,format) =>  {
     // })
     window.location.href = `${API_LINK}/download/audio?youtube_url=${url}&information=${info.title}&formats=${format.audioBitrate}`
 }
-export default convertLink | downloadMp3 | downloadMp4 | downloadAudio
+export default convertLink | downloadMp3 | downloadMp4 | downloadAudio | downloadMp3

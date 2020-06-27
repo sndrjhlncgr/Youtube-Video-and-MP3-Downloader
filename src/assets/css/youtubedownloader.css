@@ -102,3 +102,9 @@
 .embed-responsive-item-empty {
     display: none;
 }
+
+.direct-download-link {
+    border-radius: 10px 10px 10px 10px;
+    font-size: 15px;
+    font-weight: bold;
+}

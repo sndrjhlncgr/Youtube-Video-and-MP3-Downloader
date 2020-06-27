@@ -57,7 +57,7 @@ class VideoInput extends Component {
                                 this.convertLink()
                             }}
                         >
-                            Convert
+                            Go
                         </button>
                     </div>
                 </div>
