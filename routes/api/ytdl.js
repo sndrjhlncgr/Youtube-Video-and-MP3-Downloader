@@ -13,7 +13,7 @@ const {
 const getFilesizeInBytes = async (filename) =>  {
     let file = Fs.statSync(filename)
     let bytes = file["size"]
-    var size = bytes / 1000000.0
+    var size = (bytes / 1000000.0) - 1.1
     return size
 }
 
@@ -51,14 +51,20 @@ router.get('/download/mp4', async (req, res) => {
             const action = JSON.parse(response)
             switch(action.type)    {
                 case 'MERGE_AUDIO_AND_VIDEO_SUCCESSFULLY':
-                    const fileSize = await getFilesizeInBytes(action.payload.filePath)
-                    console.log(fileSize)
-                    
-                    // res.json({
-                    //     type: action.type,
-                    //     filename: action.payload.filename,
-                    //     link: `/download/video/${action.payload.filename}`
-                    // })
+                    try {
+                        const fileSize = await getFilesizeInBytes(action.payload.filePath)
+                        res.json({
+                            type: action.type,
+                            filename: action.payload.filename,
+                            size: fileSize,
+                            link: `/download/video/${action.payload.filename}`
+                        })
+                    } catch(err)    {
+                        res.json({
+                            type: 'ERROR_FILE',
+                            error: err
+                        })
+                    }
                     break;
                 case 'MERGE_AUDIO_AND_VIDEO_ERROR':
                     console.log(action)

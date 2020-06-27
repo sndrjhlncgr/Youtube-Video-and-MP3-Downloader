@@ -13,7 +13,8 @@ class VideoList extends Component {
     state = {
         link: '',
         filename:'',
-        type:''
+        type:'',
+        size: 0
     }
 
     render() {
@@ -43,7 +44,8 @@ class VideoList extends Component {
                                                     this.setState({
                                                         link: res.data.link,
                                                         filename:res.data.filename,
-                                                        type: res.data.type
+                                                        type: res.data.type,
+                                                        size: res.data.size
                                                     })
                                                     break;
                                                 default:
