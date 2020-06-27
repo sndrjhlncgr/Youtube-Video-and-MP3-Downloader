@@ -126,19 +126,21 @@ const convertVideoAndAudio = async (url,videoFormats,res) => {
     }
 }
 
-const mergeVideoAndAudio = async (tempFilename, filename, response) => {
+const mergeVideoAndAudio = async (formats, response) => {
+    const {filename,videoFilename, video_formats: {qualityLabel}} = formats
     const fullVid = new ffmpeg()
-    .addInput(Path.resolve(`./routes/api/files/${tempFilename}.mp4`))
-    .addInput(Path.resolve(`./routes/api/files/${tempFilename}.mp3`))
-    .saveToFile(Path.resolve(`./routes/api/files/${filename}.mp4`))
+    .addInput(Path.resolve(`./routes/api/files/${filename}.mp4`))
+    .addInput(Path.resolve(`./routes/api/files/${filename}.mp3`))
+    .saveToFile(Path.resolve(`./routes/api/files/${videoFilename}.mp4`))
 
     await new Promise((resolve, reject) => {
         fullVid.on('end', () => {
             resolve(JSON.stringify({
                 type: 'MERGE_AUDIO_AND_VIDEO_SUCCESSFULLY',
                 payload: {
-                    filePath: Path.resolve(`./routes/api/files/${filename}.mp4`),
-                    filename: `${filename}.mp4`
+                    filePath: Path.resolve(`./routes/api/files/${videoFilename}.mp4`),
+                    filename: `${videoFilename}.mp4`,
+                    quality: qualityLabel
                 },
             }))
         })

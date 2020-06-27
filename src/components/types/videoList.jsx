@@ -14,7 +14,8 @@ class VideoList extends Component {
         link: '',
         filename:'',
         type:'',
-        size: 0
+        size: 0,
+        quality: ''
     }
 
     render() {
@@ -35,31 +36,33 @@ class VideoList extends Component {
                                     .{format.container}
                                 </td>
                                 <td> 
-                                    {this.state.type.length === 0 ? <button type="button" className="btn btn-success btn-sm download-button" onClick={e => {
-                                        e.preventDefault();
-                                        const {url, info} = this.props
-                                        downloadMp4(url,format,info, (res) => {
-                                            switch(res.data.type) {
-                                                case 'MERGE_AUDIO_AND_VIDEO_SUCCESSFULLY':
-                                                    this.setState({
-                                                        link: res.data.link,
-                                                        filename:res.data.filename,
-                                                        type: res.data.type,
-                                                        size: res.data.size
-                                                    })
-                                                    break;
-                                                default:
-                                                    return ''
-                                            }
-                                        })
-                                    }}>Download <FontAwesomeIcon className="ml-1" icon={faChevronCircleDown}/></button>
-                                :
-                                    <button onClick={(e) => {
-                                        e.preventDefault()
-                                        console.log(this.state)
-                                        window.location.href= `http://localhost:3000/api/download/video/${this.state.filename}`
-                                    }}>Download Link</button>
-                                }
+                                    {this.state.quality !== format.qualityLabel ? 
+                                        <button type="button" className="btn btn-success btn-sm download-button" onClick={e => {
+                                            e.preventDefault();
+                                            const {url, info} = this.props
+                                            downloadMp4(url,format,info, (res) => {
+                                                switch(res.data.type) {
+                                                    case 'MERGE_AUDIO_AND_VIDEO_SUCCESSFULLY':
+                                                        this.setState({
+                                                            link: res.data.link,
+                                                            filename:res.data.filename,
+                                                            type: res.data.type,
+                                                            size: res.data.size,
+                                                            quality: res.data.quality
+                                                        })
+                                                        break;
+                                                    default:
+                                                        return ''
+                                                }
+                                            })
+                                        }}>Download <FontAwesomeIcon className="ml-1" icon={faChevronCircleDown}/></button>
+                                    :
+                                        <button onClick={(e) => {
+                                            e.preventDefault()
+                                            console.log(this.state)
+                                            // window.location.href= `http://localhost:3000/api/download/video/${this.state.filename}`
+                                        }}>Download Link</button>
+                                    }
                                 </td>
                             </tr>
                         )
