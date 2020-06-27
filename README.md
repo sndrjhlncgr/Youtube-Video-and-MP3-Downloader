@@ -10,5 +10,36 @@
 
 ![Image of Sandro Cagara](https://i.ibb.co/cxQjXy0/Youtube-Downloader.jpg)
 
+## Installation
+
+Clone the repo:
+```
+ git clone https://github.com/sndrjhlncgr/Youtube-Video-and-MP3-Downloader.git
+```
+ ### Install
+ 
+ Install the node modules:
+ 
+ ```bash
+  $ cd react-youtube-downloader
+  $ npm install
+ ```
+ ### Run the project
+
+ Start the project:
+ 
+ ```bash
+  $ npm start
+ ```
+  build the project:
+  ```bash
+  $ npm run build
+ ```
+ ***Note***: in the future maybe i will remove `npm run build`. 
+
+## Contribution
+
+Feel Free to contribute, PR are the most welcome :)
+
 ## License
 Copyright (c) 2020 Sandro Cagara | Youtube Downloader
