@@ -137,7 +137,7 @@ const mergeVideoAndAudio = async (tempFilename, filename, response) => {
             resolve(JSON.stringify({
                 type: 'MERGE_AUDIO_AND_VIDEO_SUCCESSFULLY',
                 payload: {
-                    // file: Path.resolve(`./routes/api/files/${filename}.mp4`),
+                    filePath: Path.resolve(`./routes/api/files/${filename}.mp4`),
                     filename: `${filename}.mp4`
                 },
             }))

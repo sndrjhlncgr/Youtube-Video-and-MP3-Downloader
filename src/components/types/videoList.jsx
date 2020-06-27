@@ -55,7 +55,7 @@ class VideoList extends Component {
                                     <button onClick={(e) => {
                                         e.preventDefault()
                                         console.log(this.state)
-                                        window.location.href= `http://localhost:3000/api/download/${this.state.filename}`
+                                        window.location.href= `http://localhost:3000/api/download/video/${this.state.filename}`
                                     }}>Download Link</button>
                                 }
                                 </td>

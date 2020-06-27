@@ -9,6 +9,15 @@ const {
     mergeVideoAndAudio
 } = require('../_utils/processClass')
 
+
+const getFilesizeInBytes = async (filename) =>  {
+    let file = Fs.statSync(filename)
+    let bytes = file["size"]
+    var size = bytes / 1000000.0
+    return size
+}
+
+
 router.get('/convert', async (req, res) => {
     try {
         const url = req.query.URL
@@ -31,7 +40,6 @@ router.get('/download/mp4', async (req, res) => {
     }
 
     try {
-        const output = Path.resolve(__dirname,`./files/${videoFormats.videoFilename}.mp4`)
         if(!await convertVideoAndAudio(url,videoFormats,res))  {
             res.json({
                 type: 'ERROR',
@@ -39,15 +47,18 @@ router.get('/download/mp4', async (req, res) => {
             })
         }
 
-        await mergeVideoAndAudio(videoFormats.filename,videoFormats.videoFilename, (response) => {
+        await mergeVideoAndAudio(videoFormats.filename,videoFormats.videoFilename, async (response) => {
             const action = JSON.parse(response)
             switch(action.type)    {
                 case 'MERGE_AUDIO_AND_VIDEO_SUCCESSFULLY':
-                    res.json({
-                        type: action.type,
-                        filename: action.payload.filename,
-                        link: `/download/${action.payload.filename}`
-                    })
+                    const fileSize = await getFilesizeInBytes(action.payload.filePath)
+                    console.log(fileSize)
+                    
+                    // res.json({
+                    //     type: action.type,
+                    //     filename: action.payload.filename,
+                    //     link: `/download/video/${action.payload.filename}`
+                    // })
                     break;
                 case 'MERGE_AUDIO_AND_VIDEO_ERROR':
                     console.log(action)
@@ -66,7 +77,7 @@ router.get('/download/mp4', async (req, res) => {
     }
 })
 
-router.get('/download/:filename', (req, res) => {
+router.get('/download/video/:filename', (req, res) => {
     const {filename} = req.params
     const video = Path.resolve(`./routes/api/files/${filename}`);
     res.download(video)
