@@ -9,11 +9,6 @@ class VideoInput extends Component {
         url: 'https://youtu.be/vDNG5AkNfcs?list=RDUSNFrnSQEfU',
         videoInfo: {}
     }
-    componentDidMount() {
-        // this.setState({url: 'https://youtu.be/r2nyvDJO9hk'})
-        // this.convertLink() 
-        // for test
-    }
 
     convertLink = () => {
         convertLink(this.state.url, (res) => {

@@ -35,8 +35,8 @@ class VideoList extends Component {
                 {this.props.info && this.props.info.formats && this.props.info.formats.filter(data =>  data.codecs.includes('H.264') || data.codecs.includes('av01') && data.mimeType.includes('video/mp4')).map((format, index) => {
                         if(this.state.quality !== format.qualityLabel)  {
                             return (
-                                <tr key={index}>
-                                    <td>
+                                <tr key={index} className="video-formats">
+                                    <td className="resolution-types">
                                         {format.qualityLabel} 
                                         {resoType.filter(reso => reso.resolution === format.qualityLabel).map((res,index) => {
                                             return (
@@ -44,10 +44,10 @@ class VideoList extends Component {
                                             )
                                         })}
                                     </td>
-                                    <td>
+                                    <td className="extension-types">
                                         .{format.container}
                                     </td>
-                                    <td> 
+                                    <td className="convert-button-types"> 
                                         <button type="button" className="btn btn-success btn-sm download-button" onClick={e => {
                                                     e.preventDefault();
                                                     const {url, info} = this.props
@@ -68,7 +68,7 @@ class VideoList extends Component {
                                                                 return ''
                                                         }
                                                     })
-                                            }}>Convert {format.qualityLabel} <FontAwesomeIcon className="ml-1" icon={faChevronCircleDown}/></button>
+                                            }}>Convert <FontAwesomeIcon className="ml-1" icon={faChevronCircleDown}/></button>
                                     </td>
                                 </tr>
                             )

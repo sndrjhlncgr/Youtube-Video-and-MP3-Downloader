@@ -86,7 +86,7 @@ class ConvertPanel extends Component {
                         </ul>
                         <div className="tab-content" id="myTabContent">
                             <div className={`tab-pane fade show ${this.state.eventkey === "video" ? 'active': ''}`} role="tabpanel" aria-labelledby="home-tab">
-                                <table className="table table-borderless mt-2">
+                                <table className="table table-borderless mt-2 ml-2">
                                     <thead>
                                         <ColumnTypes/>
                                     </thead>
@@ -94,7 +94,7 @@ class ConvertPanel extends Component {
                                 </table>
                             </div>
                             <div className={`tab-pane fade show ${this.state.eventkey === "mp3" ? 'active': ''}`} role="tabpanel" aria-labelledby="profile-tab">
-                                <table className="table table-borderless mt-2">
+                                <table className="table table-borderless mt-2 ml-2">
                                     <thead>
                                         <ColumnTypes/>
                                     </thead>
@@ -102,7 +102,7 @@ class ConvertPanel extends Component {
                                 </table>
                             </div>
                             <div className={`tab-pane fade show ${this.state.eventkey === "audio" ? 'active': ''}`} role="tabpanel" aria-labelledby="contact-tab">
-                                <table className="table table-borderless mt-2">
+                                <table className="table table-borderless mt-2 ml-2">
                                     <thead>
                                         <ColumnTypes/>
                                     </thead>

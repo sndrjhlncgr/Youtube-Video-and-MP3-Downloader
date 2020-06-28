@@ -83,7 +83,10 @@
     border-radius: 10px 10px 10px 10px;
     font-size: 15px;
     font-weight: bold;
+    width: 250px;
 }
+
+
 
 .badge-danger-resolution {
     font-size: 10px;
@@ -120,4 +123,20 @@
     font-size: 11px;
     width: 18px;
     height:18px;
+}
+
+.table-borderless thead {
+    width: 100%;
+}
+
+.video-formats .resolution-types{
+    width: 30%;
+}
+
+.video-formats .extension-types{
+    width: 30%;
+}
+
+.video-formats .convert-button-types{
+    width: 40%;
 }

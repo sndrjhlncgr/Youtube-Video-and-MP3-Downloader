@@ -13,15 +13,15 @@ class AudioList extends Component {
             <tbody>
                 {this.props.info && this.props.info.formats && this.props.info.formats.filter(data => data.mimeType.includes('audio')).map((format, index) => {
                         return (
-                            <tr key={index}>
-                                <td>
+                            <tr key={index} className="video-formats">
+                                <td className="resolution-types">
                                     {format.audioBitrate}
                                     <span className="badge badge-success badge-success-resolution ml-2">Kbps</span>
                                 </td>
-                                <td>
+                                <td className="extension-types">
                                     .mp3
                                 </td>
-                                <td> 
+                                <td className="convert-button-types"> 
                                     <button type="button" className="btn btn-success download-button btn-sm" onClick={e => {
                                         e.preventDefault();
                                         const {url, info} = this.props
