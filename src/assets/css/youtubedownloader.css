@@ -31,7 +31,7 @@
 .go-button {
     font-size: 18px;
     border-radius: 0px 10px 10px 0px;
-    width: (100% - 200px);
+    width: 100px;
     height: 100%;
     color: rgb(240, 240, 240) !important;
     background-color: rgb(46, 164, 79) !important;

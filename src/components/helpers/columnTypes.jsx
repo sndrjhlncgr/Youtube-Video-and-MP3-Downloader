@@ -4,8 +4,8 @@ class ColumnTypes extends Component {
     render() {
         return (
             <tr>
-                <th scope="col">Resolution</th>
-                <th scope="col">File Type</th>
+                <th scope="col">Resolutions</th>
+                <th scope="col">File Types</th>
                 <th scope="col">Download</th>
             </tr>
         )

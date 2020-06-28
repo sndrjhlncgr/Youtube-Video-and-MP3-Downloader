@@ -68,7 +68,7 @@ class ConvertPanel extends Component {
                             <li className="nav-item">
                                 <div className={`nav-link ${this.state.eventkey === "video" && 'active'}`} id="video" onClick={e => this.setState({eventkey: e.target.id})}>
                                     <FontAwesomeIcon icon={faPlay} id="video" />  
-                                    <strong id="video" className="ml-2">Video</strong>
+                                    <strong id="video" className="ml-2">Videos</strong>
                                 </div>
                             </li>
                             <li className="nav-item">
