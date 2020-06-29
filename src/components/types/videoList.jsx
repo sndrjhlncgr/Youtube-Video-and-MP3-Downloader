@@ -34,7 +34,7 @@ class VideoList extends Component {
                     </td>
                 </tr>  */}
                 {this.props.info && this.props.info.formats && this.props.info.formats.filter(data =>  data.codecs.includes('H.264') || data.codecs.includes('av01') && data.mimeType.includes('video/mp4')).map((format, index) => {
-                        if(this.state.quality !== format.qualityLabel && this.state.processingVideoType !== format.qualityLabel )  {
+                        if(this.state.quality !== format.qualityLabel && this.state.processingVideoType !== format.qualityLabel)  {
                             return (
                                 <tr key={index} className="video-formats">
                                     <td className="resolution-types">
