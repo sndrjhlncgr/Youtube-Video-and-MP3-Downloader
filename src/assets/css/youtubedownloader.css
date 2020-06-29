@@ -69,6 +69,11 @@
 .nav-tabs .nav-link.active {
     color: rgb(79, 79, 79);
     background-color: #fff;
+    -moz-user-select: none; 
+    -webkit-user-select: none; 
+    -ms-user-select:none; 
+    user-select:none;
+    -o-user-select:none;
 }
 
 .nav-link:focus {
