@@ -69,18 +69,21 @@ class ConvertPanel extends Component {
                                 <div className={`nav-link ${this.state.eventkey === "video" && 'active'}`} id="video" onClick={e => this.setState({eventkey: e.target.id})}>
                                     <FontAwesomeIcon icon={faPlay} id="video" />  
                                     <strong id="video" className="ml-2">Videos</strong>
+                                    <span id="video" class="badge badge-pill badge-dark float-right mr-1 mt-1">0</span>
                                 </div>
                             </li>
                             <li className="nav-item">
                                 <div className={`nav-link ${this.state.eventkey === "mp3" && 'active'}`} id="mp3" onClick={e => this.setState({eventkey: e.target.id})} >
                                     <FontAwesomeIcon icon={faHeadphones} id="mp3"/>
                                     <strong id="mp3" className="ml-2">Mp3</strong>
+                                    <span id="mp3" class="badge badge-pill badge-dark float-right mr-1 mt-1">0</span>
                                 </div>
                             </li>
                             <li className="nav-item">
                                 <div className={`nav-link ${this.state.eventkey === "audio" && 'active'}`} id="audio" onClick={e => this.setState({eventkey: e.target.id})} >
                                     <FontAwesomeIcon icon={faFileAudio} id="audio" />
                                     <strong id="audio" className="ml-2">Audio</strong>
+                                    <span id="audio"  class="badge badge-pill badge-dark float-right mr-1 mt-1">0</span>
                                 </div>
                             </li>
                         </ul>
