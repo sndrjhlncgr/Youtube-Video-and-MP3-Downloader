@@ -49,7 +49,7 @@ class VideoList extends Component {
                                         .{format.container}
                                     </td>
                                     <td className="convert-button-types"> 
-                                        <button type="button" className="btn btn-success btn-sm download-button" onClick={e => {
+                                        <button type="button" disabled={this.state.processingVideoType && this.state.processingVideoType !== format.qualityLabel } className="btn btn-success btn-sm download-button" onClick={e => {
                                                     e.preventDefault();
                                                     const {url, info} = this.props
                                                     this.setState({processing: true, processingVideoType:format.qualityLabel})
