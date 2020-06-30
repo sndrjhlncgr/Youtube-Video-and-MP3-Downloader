@@ -15,11 +15,10 @@ class ConvertPanel extends Component {
 
     state = {
         info: {},
-        eventkey: 'video'
-    }
-
-    componentDidMount() {
-        this.resetState();
+        eventkey: 'video',
+        videoLength: 0,
+        mp3Length: 0,
+        audioLength: 0,
     }
 
     componentDidUpdate(prevProps, prevState, snapShot) {
@@ -28,14 +27,26 @@ class ConvertPanel extends Component {
         }
     }
 
-    resetState = () => {
-        
-    }
 
     openPanel = () => {
         this.setState({info: this.props.data}, () => {
-            console.log(this.state.info)
+            this.getResultLength(this.state.info,(res) => {
+                return {
+                    videoLength: res.videoLength,
+                    mp3Length: res.mp3Length,
+                    audioLength: res.audioLength,
+                }
+            })
+            console.log(this.state)
         })
+    }
+
+    getResultLength = (info, res) => {
+        const {formats} = info
+        const videoLength = formats.filter(data =>  data.codecs.includes('H.264') || data.codecs.includes('av01') && data.mimeType.includes('video/mp4')).length
+        const mp3Length = formats.filter(data =>  data.codecs.includes('H.264') || data.codecs.includes('av01') && data.mimeType.includes('video/mp4')).length
+        const audioLength = formats.filter(data =>  data.codecs.includes('H.264') || data.codecs.includes('av01') && data.mimeType.includes('video/mp4')).length
+        res(videoLength,mp3Length,audioLength)
     }
 
     render() {
@@ -70,21 +81,21 @@ class ConvertPanel extends Component {
                                     className={`nav-link ${this.state.eventkey === "video" && 'active'}`} id="video" onClick={e => this.setState({eventkey: e.target.id})}>
                                     <FontAwesomeIcon icon={faPlay} id="video" />  
                                     <strong id="video" className="ml-2">Videos</strong>
-                                    <span id="video" className="badge badge-pill badge-dark float-right mr-1 mt-1">0</span>
+                                    <span id="video" className="badge badge-pill badge-light float-right mr-1 mt-1">0</span>
                                 </div>
                             </li>
                             <li className="nav-item">
                                 <div className={`nav-link ${this.state.eventkey === "mp3" && 'active'}`} id="mp3" onClick={e => this.setState({eventkey: e.target.id})} >
                                     <FontAwesomeIcon icon={faHeadphones} id="mp3"/>
                                     <strong id="mp3" className="ml-2">Mp3</strong>
-                                    <span id="mp3" className="badge badge-pill badge-dark float-right mr-1 mt-1">0</span>
+                                    <span id="mp3" className="badge badge-pill badge-light float-right mr-1 mt-1">0</span>
                                 </div>
                             </li>
                             <li className="nav-item">
                                 <div className={`nav-link ${this.state.eventkey === "audio" && 'active'}`} id="audio" onClick={e => this.setState({eventkey: e.target.id})} >
                                     <FontAwesomeIcon icon={faFileAudio} id="audio" />
                                     <strong id="audio" className="ml-2">Audio</strong>
-                                    <span id="audio"  className="badge badge-pill badge-dark float-right mr-1 mt-1">0</span>
+                                    <span id="audio"  className="badge badge-pill badge-light float-right mr-1 mt-1">0</span>
                                 </div>
                             </li>
                         </ul>
