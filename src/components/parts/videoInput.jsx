@@ -2,17 +2,20 @@ import React, {Component} from 'react'
 import {convertLink} from '../../_utils/api.js'
 import { Link } from 'react-router-dom'
 import ConvertPanel from './convertPanel.jsx'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 
 class VideoInput extends Component {
     state = {
         checkLink: false,
         url: 'https://youtu.be/vDNG5AkNfcs?list=RDUSNFrnSQEfU',
-        videoInfo: {}
+        videoInfo: {},
+        refresh: false
     }
 
     convertLink = () => {
         convertLink(this.state.url, (res) => {
-            this.setState({videoInfo: res.data})
+            this.setState({videoInfo: res.data, refresh: true})
         })
     }
     autoPaste = (e) => {
@@ -21,6 +24,15 @@ class VideoInput extends Component {
             this.setState({url: text})
             this.convertLink()
         });
+    }
+
+    refresh = () => {
+        this.setState({
+            refresh: false,
+            checkLink: false,
+            url: '',
+            videoInfo: {}
+        })
     }
 
     render() {
@@ -43,6 +55,7 @@ class VideoInput extends Component {
                         }}
                     />
                     <div className="input-group-append">
+                       {!this.state.refresh ?
                         <button
                             type="button"
                             className={`btn btn-light form-control go-button`}
@@ -54,6 +67,19 @@ class VideoInput extends Component {
                         >
                             Go
                         </button>
+                    :
+                        <button
+                            type="button"
+                            className={`btn btn-light form-control go-button`}
+                            disabled={this.state.url.length === 0}
+                            onClick={(e) => {
+                                e.preventDefault()
+                                this.refresh()
+                            }}
+                        >
+                             <FontAwesomeIcon icon={faSyncAlt}/>  
+                        </button>    
+                    }
                     </div>
                 </div>
                 <small className="form-text text-muted terms-of-use">By using our service you are accepting our <Link to="/terms-of-service" target="_blank">terms of use.</Link></small>

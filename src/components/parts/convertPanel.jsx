@@ -38,9 +38,9 @@ class ConvertPanel extends Component {
 
     getResultLength = (info, res) => {
         const {formats} = info
-        const videoLength = formats.filter(data =>  data.codecs.includes('H.264') || data.codecs.includes('av01') && data.mimeType.includes('video/mp4')).length
-        const mp3Length = formats.filter(data => data.mimeType.includes('audio') && data.audioBitrate === 128).length
-        const audioLength = formats.filter(data => data.mimeType.includes('audio')).length
+        const videoLength = formats ? formats.filter(data =>  data.codecs.includes('H.264') || data.codecs.includes('av01') && data.mimeType.includes('video/mp4')).length : 0 
+        const mp3Length = formats ? formats.filter(data => data.mimeType.includes('audio') && data.audioBitrate === 128).length : 0
+        const audioLength = formats ? formats.filter(data => data.mimeType.includes('audio')).length : 0
         res(videoLength,mp3Length,audioLength)
     }
 
@@ -54,8 +54,8 @@ class ConvertPanel extends Component {
                                 className={`embed-responsive-item ${!this.state.info.video_id ? 'embed-responsive-item-empty' : ''}`}
                                 src={`https://www.youtube.com/embed/${
                                     this.state.info.video_id
-                                        ? this.state.info.video_id
-                                        : ''
+                                        && this.state.info.video_id
+                                     
                                 }`}
                             ></iframe>
                         </div>

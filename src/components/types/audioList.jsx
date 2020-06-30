@@ -16,7 +16,7 @@ class AudioList extends Component {
                             <tr key={index} className="video-formats">
                                 <td className="resolution-types">
                                     {format.audioBitrate}
-                                    <span className="badge badge-success badge-success-resolution ml-2">Kbps</span>
+                                    <span className="badge badge-dark badge-success-resolution ml-2">Kbps</span>
                                 </td>
                                 <td className="extension-types">
                                     .mp3
