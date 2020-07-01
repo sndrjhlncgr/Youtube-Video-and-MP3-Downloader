@@ -7,8 +7,8 @@ import { faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 
 class VideoInput extends Component {
     state = {
-        checkLink: false,
-        url: 'https://youtu.be/vDNG5AkNfcs?list=RDUSNFrnSQEfU',
+        checkLink: true,
+        url: '',
         videoInfo: {},
         refresh: false
     }
@@ -18,13 +18,14 @@ class VideoInput extends Component {
             this.setState({videoInfo: res.data, refresh: true})
         })
     }
-    autoPaste = (e) => {
-        navigator.clipboard.readText()
-        .then(text => {
-            this.setState({url: text})
-            this.convertLink()
-        });
-    }
+    
+    // autoPaste = (e) => {
+    //     navigator.clipboard.readText()
+    //     .then(text => {
+    //         this.setState({url: text})
+    //         this.convertLink()
+    //     });
+    // }
 
     refresh = () => {
         this.setState({
@@ -33,6 +34,24 @@ class VideoInput extends Component {
             url: '',
             videoInfo: {}
         })
+    }
+
+    checkValidLink = (url) => {
+        if (url != undefined || url != '') {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            if (match && match[2].length == 11) {
+                this.setState({
+                    checkLink: true,
+                    url: url
+                })
+                return
+            }
+            this.setState({
+                checkLink: false,
+                url: ''
+            })
+        }
     }
 
     render() {
@@ -47,15 +66,15 @@ class VideoInput extends Component {
                         placeholder="Click this or paste link here..."
                         onChange={(e) => {
                             e.preventDefault();
-                            this.setState({url: e.target.value})
+                            this.checkValidLink(e.target.value)
                         }}
                         onClick={e => {
                             e.preventDefault();
-                            this.autoPaste(e)
+                            // this.autoPaste(e)
                         }}
                     />
                     <div className="input-group-append">
-                       {!this.state.refresh ?
+                       {!this.state.refresh?
                         <button
                             type="button"
                             className={`btn btn-light form-control go-button`}
@@ -82,6 +101,7 @@ class VideoInput extends Component {
                     }
                     </div>
                 </div>
+                {!this.state.checkLink && <small>not yputube link</small>}
                 <small className="form-text text-muted terms-of-use">By using our service you are accepting our <Link to="/terms-of-service" target="_blank">terms of use.</Link></small>
                 <div className="mb-3 mt-5 whole-panel">
                     <ConvertPanel data={this.state.videoInfo} url={this.state.url}/>
