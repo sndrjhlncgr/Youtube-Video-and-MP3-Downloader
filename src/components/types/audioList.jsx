@@ -4,10 +4,6 @@ import { faChevronCircleDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class AudioList extends Component {
-    constructor(props) {
-        super(props)
-    }
-    
     render() {
         return (
             <tbody>

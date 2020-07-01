@@ -7,11 +7,6 @@ import Spinner from 'react-bootstrap/Spinner'
 
 
 class VideoList extends Component {
-    constructor(props) {
-        super(props)
-    }
-
-
     state = {
         link: '',
         filename:'',

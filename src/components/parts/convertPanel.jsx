@@ -9,10 +9,6 @@ import AudioList from '../types/audioList'
 import ColumnTypes from '../helpers/columnTypes'
 
 class ConvertPanel extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     state = {
         info: {},
         eventkey: 'video',

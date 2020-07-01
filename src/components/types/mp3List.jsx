@@ -5,10 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 class Mp3List extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         return (
             <tbody>
