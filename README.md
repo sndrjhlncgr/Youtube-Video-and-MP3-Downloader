@@ -8,7 +8,7 @@
    <a href="https://github.com/sndrjhlncgr/youtube-downloader/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/sndrjhlncgr/youtube-downloader"></a>
 <p align="center">
 
-![Image of Sandro Cagara](https://i.ibb.co/cxQjXy0/Youtube-Downloader.jpg)
+![Image of Sandro Cagara](https://i.ibb.co/bRZ45W7/Youtube-Downloader-v1-0-1.jpg)
 
 ## Installation
 
