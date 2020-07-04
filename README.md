@@ -1,5 +1,5 @@
 <h1 align="center">Youtube Video & Mp3 Downloader</h1>
-<p align="center">Application that download high resolution youtube videos up to 8K and etc.</p>
+<p align="center">An application that downloads high-resolution youtube videos from 144p to 8K and Mp3 from 48kbps to 160 Kbps.</p>
 
 <p align="center">
    <a href="https://github.com/sndrjhlncgr/youtube-downloader/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/sndrjhlncgr/youtube-downloader"></a>
