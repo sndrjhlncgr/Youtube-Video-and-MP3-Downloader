@@ -31,11 +31,6 @@ Clone the repo:
  ```
   $ npm start
  ```
-  build the project:
-  ```
-  $ npm run build
- ```
- ***Note***: in the future maybe i will remove `npm run build`. 
 
 ## Contribution
 
