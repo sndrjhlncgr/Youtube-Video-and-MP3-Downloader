@@ -4,7 +4,7 @@ const webpack = require('webpack')
 module.exports = {
     mode: 'development',
     context: resolve(__dirname, 'src'),
-    entry: ['react-hot-loader/patch', './index.jsx'],
+    entry: ['react-hot-loader/patch','webpack-hot-middleware/client', './index.jsx'],
     output: {
         filename: 'build.js',
         path: '/',
