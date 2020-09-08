@@ -12,6 +12,9 @@ module.exports = {
     },
     resolve: {
         extensions: ['.js', '.jsx'],
+        alias: {
+            'react-dom': '@hot-loader/react-dom',
+        },
     },
     module: {
         rules: [
@@ -42,5 +45,7 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.NoEmitOnErrorsPlugin()
     ],
 }
