@@ -11,7 +11,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.10",
     "@hot-loader/react-dom": "^16.13.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-jest": "^26.0.1",
     "babel-preset-react": "^6.24.1",
     "bootstrap": "^4.5.0",
