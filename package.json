@@ -19,7 +19,7 @@
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
-    "express": "~4.16.1",
+    "express": "~4.17.3",
     "file-loader": "^6.0.0",
     "fluent-ffmpeg": "^2.1.2",
     "http-errors": "~1.6.3",
